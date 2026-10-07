@@ -11,7 +11,7 @@ const $ = s => document.querySelector(s);
 const param = n => new URLSearchParams(location.search).get(n);
 const theme = id => THEMES.find(t => t.id === id);
 const key = (t, l) => t + ":" + l;
-const pct = t => t.page ? Math.round(100 * (S.pAng || 0)) : Math.round(100 * t.lecons.filter(l => S.done[key(t.id, l.id)]).length / (t.lecons.length || 1));
+const pct = t => t.page ? Math.round(100 * (S[t.pct] || 0)) : Math.round(100 * t.lecons.filter(l => S.done[key(t.id, l.id)]).length / (t.lecons.length || 1));
 const isDue = k => { const d = S.done[k]; return !!(d && d.next && d.next <= Date.now()); };
 const best = k => (S.scores[k] || []).reduce((m, s) => Math.max(m, Math.round(100 * s.score / s.total)), null);
 const pdfView = p => `<iframe src="${p}" title="Document PDF"></iframe><p class="mut"><a href="${p}" target="_blank" rel="noopener">Ouvrir le PDF dans un nouvel onglet</a></p>`;
