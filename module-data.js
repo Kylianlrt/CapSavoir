@@ -69,4 +69,75 @@ mod("maths", "Mathématiques", "fr-FR", ["Module 1 — Les fractions", "Comprend
   "Expliquez à voix haute comment additionner deux fractions.",
   [Q("Le dénominateur est…",["En haut","En bas","Le résultat"],1),Q("1/3 + 1/3 = ?",["2/3","2/6","1/3"],0),Q("2/3 × 3/5 = ?",["2/5","5/8","6/8"],0),T("Simplifiez 4/8 (a/b)","1/2"),Q("1/2 est égal à…",["2/4","1/4","3/4"],0)]));
 
+/* ============================================================
+   COMMENT AJOUTER DU CONTENU (voir AJOUTER-UN-COURS.md)
+   add("espagnol", 6, C(leçon_html, vocabulaire, exemples, exercices, oral, évaluation));
+   addModule("espagnol", "Module 3 — Titre", "Cours A|Cours B|Cours C");
+   Les cours sont numérotés dans l'ordre, tous modules confondus.
+   ============================================================ */
+const add = (id, n, c) => (MODS[id].content[n] = c);
+const addModule = (id, titre, titres) => MODS[id].plan.push([titre, titres]);
+
+/* ---------- ESPAGNOL · Module 1 (cours 2 à 5) + Module 2 ---------- */
+add("espagnol", 2, C("<h2>Los números</h2><p>0-20 : cero, uno, dos, tres, cuatro, cinco, seis, siete, ocho, nueve, diez, once, doce, trece, catorce, quince, dieciséis, diecisiete, dieciocho, diecinueve, veinte.</p><div class='key'>Dizaines : treinta (30), cuarenta (40), cincuenta (50). De 31 à 99, on écrit en trois mots : <b>treinta y uno</b> (31).</div>",
+  [["siete","sept"],["diez","dix"],["quince","quinze"],["veinte","vingt"],["treinta y cinco","trente-cinq"]],
+  ["Tengo dos hermanos.","Mi número favorito es el siete.","Hay treinta y cinco alumnos en la clase."],
+  [Q("Cuatro =",["3","4","5"],1),Q("« Dix » se dit…",["diez","doce","once"],0),T("Écrivez 15 en espagnol","quince")],
+  "Comptez de 0 à 20 à voix haute, puis de 10 en 10 jusqu'à 100.",
+  [Q("Seis =",["5","6","7"],1),Q("« Huit » =",["siete","ocho","nueve"],1),T("Écrivez 12 en espagnol","doce"),Q("40 =",["catorce","cuarenta","cincuenta"],1),T("Écrivez 31 en espagnol (3 mots)","treinta y uno")]));
+
+add("espagnol", 3, C("<h2>Presentarse</h2><p><b>Me llamo…</b> (je m'appelle), <b>Soy de…</b> (je suis de), <b>Tengo… años</b> (j'ai… ans), <b>Vivo en…</b> (j'habite à). Le verbe <b>ser</b> : soy, eres, es, somos, sois, son.</p><div class='key'>L'âge se dit avec <b>tener</b> (avoir) : « Tengo 20 años », jamais « Soy 20 años ».</div>",
+  [["Me llamo","je m'appelle"],["Soy de Francia","je suis de France"],["Tengo veinte años","j'ai vingt ans"],["Vivo en Toulouse","j'habite à Toulouse"],["Mucho gusto","enchanté"]],
+  ["Me llamo Pablo.","Soy de Francia y vivo en Toulouse.","Hola, me llamo Lucía, tengo veinte años y soy estudiante."],
+  [Q("Pour dire son âge, on utilise…",["ser","tener","vivir"],1),T("Complétez : « ___ de Francia » (je suis)","soy"),Q("Mucho gusto =",["Au revoir","Enchanté","Merci"],1)],
+  "Présentez-vous en 4 phrases : nom, âge, origine, ville.",
+  [Q("Me llamo =",["J'habite","Je m'appelle","J'ai"],1),Q("« J'ai 25 ans » =",["Soy 25 años","Tengo 25 años","Vivo 25 años"],1),T("Complétez : « Vivo ___ Madrid »","en"),T("« Tu es » (ser) =","eres"),Q("Soy de Francia =",["Je suis de France","J'habite en France","J'aime la France"],0)]));
+
+add("espagnol", 4, C("<h2>La familia</h2><p>padre, madre, hermano/a, abuelo/a, tío/a, primo/a, hijo/a. Possessifs : <b>mi</b> (mon/ma), <b>tu</b>, <b>su</b> ; au pluriel on ajoute -s : <i>mis hermanos</i>.</p><div class='key'>Le masculin pluriel désigne un groupe mixte : <b>los padres</b> = les parents, <b>los hermanos</b> = frères et sœurs.</div>",
+  [["el padre","le père"],["la madre","la mère"],["el hermano","le frère"],["la abuela","la grand-mère"],["el primo","le cousin"]],
+  ["Mi madre se llama Ana.","Tengo una hermana y dos primos.","Mis abuelos viven en un pueblo cerca del mar."],
+  [Q("La abuela =",["La tante","La grand-mère","La cousine"],1),Q("« Mes frères et sœurs » =",["mis hermanos","mi hermanos","mis hermano"],0),T("« Le père » en espagnol (avec article)","el padre")],
+  "Décrivez votre famille en quatre phrases.",
+  [Q("Madre =",["Père","Mère","Fille"],1),Q("Tío =",["Oncle","Cousin","Grand-père"],0),T("« Ma mère » = ___ madre","mi"),Q("Los padres désigne…",["Les pères uniquement","Les parents","Les grands-parents"],1),T("« La cousine » = la ___","prima")]));
+
+add("espagnol", 5, C("<h2>En el restaurante</h2><p>Pour commander : <b>Quisiera…</b> (je voudrais) ou <b>Quiero…</b> (je veux). Pour payer : <b>La cuenta, por favor</b>.</p><div class='key'>Dans un bar à tapas, on commande plusieurs <b>tapas</b> (petites portions) à partager.</div>",
+  [["la carta","le menu"],["el agua","l'eau"],["la cuenta","l'addition"],["Quisiera…","je voudrais…"],["el camarero","le serveur"]],
+  ["Una mesa para dos, por favor.","Quisiera una ensalada y agua, por favor.","Quiero un zumo y, de postre, un flan. La cuenta, por favor."],
+  [Q("La cuenta =",["Le menu","L'addition","Le serveur"],1),Q("« Je voudrais » =",["Quisiera","Tengo","Soy"],0),T("« L'eau » en espagnol (sans article)","agua")],
+  "Jouez la scène : demandez une table, commandez un plat et une boisson, demandez l'addition.",
+  [Q("Carta =",["Menu","Addition","Boisson"],0),Q("Camarero =",["Cuisinier","Serveur","Client"],1),T("« L'addition » = la ___","cuenta"),Q("Pour demander poliment, on dit…",["Quiero ya","Quisiera…, por favor","Dame"],1),T("« S'il vous plaît » =","por favor")]));
+
+addModule("espagnol", "Module 2 — Le quotidien", "Los verbos en -ar|Los verbos en -er / -ir|Ser y estar|La hora|La rutina diaria");
+
+/* ---------- MATHS · Module 1 (cours 2 à 5) + Module 2 ---------- */
+add("maths", 2, C("<h2>Simplifier une fraction</h2><p>On divise numérateur et dénominateur par le même nombre, idéalement leur <b>PGCD</b>. 12/18 : PGCD = 6, donc <b>2/3</b>.</p><div class='key'>Une fraction est irréductible quand seul 1 divise à la fois le haut et le bas.</div>",
+  [["PGCD","plus grand diviseur commun"],["Irréductible","ne peut plus être simplifiée"],["12/18","= 2/3"],["10/15","= 2/3"],["Fractions égales","même valeur, écritures différentes"]],
+  ["4/8 se simplifie en 1/2.","12/18 se simplifie en 2/3 (÷ 6).","Le PGCD de 24 et 36 est 12, donc 24/36 = 2/3."],
+  [Q("Simplifiez 4/10",["2/5","1/3","4/5"],0),Q("PGCD de 12 et 18 ?",["3","6","9"],1),T("Simplifiez 9/12 (a/b)","3/4")],
+  "Expliquez à voix haute comment simplifier 18/24.",
+  [Q("6/9 =",["2/3","3/4","1/3"],0),Q("Une fraction irréductible…",["est supérieure à 1","ne peut plus être simplifiée","a un dénominateur pair"],1),T("Simplifiez 10/20 (a/b)","1/2"),Q("PGCD de 20 et 30 ?",["5","10","15"],1),T("Simplifiez 15/25 (a/b)","3/5")]));
+
+add("maths", 3, C("<h2>Additionner et soustraire</h2><p>Même dénominateur : on additionne les numérateurs (2/7 + 3/7 = 5/7). Sinon on cherche un <b>dénominateur commun</b> : 1/3 + 1/4 = 4/12 + 3/12 = <b>7/12</b>.</p>",
+  [["Dénominateur commun","multiple commun aux dénominateurs"],["1/3 + 1/4","7/12"],["2/5 + 1/5","3/5"],["3/4 − 1/2","1/4"],["PPCM","plus petit multiple commun"]],
+  ["2/7 + 3/7 = 5/7.","1/3 + 1/4 = 7/12.","3/4 − 1/6 = 9/12 − 2/12 = 7/12."],
+  [Q("2/5 + 1/5 =",["3/10","3/5","2/5"],1),Q("1/2 + 1/3 =",["5/6","2/5","1/5"],0),T("3/4 − 1/2 = ? (a/b)","1/4")],
+  "Expliquez à voix haute comment calculer 1/3 + 1/4.",
+  [Q("3/8 + 2/8 =",["5/8","5/16","6/8"],0),Q("1/2 + 1/4 =",["3/4","2/6","1/6"],0),T("2/3 − 1/3 = ? (a/b)","1/3"),Q("Plus petit dénominateur commun de 1/4 et 1/6 ?",["10","12","24"],1),T("1/2 + 1/6 = ? (a/b, simplifié)","2/3")]));
+
+add("maths", 4, C("<h2>Multiplier et diviser</h2><p>Multiplier : numérateur × numérateur, dénominateur × dénominateur. Diviser par une fraction = multiplier par son <b>inverse</b> : 1/2 ÷ 3/4 = 1/2 × 4/3 = <b>2/3</b>.</p>",
+  [["Inverse de 3/4","4/3"],["1/2 × 1/3","1/6"],["2/3 × 3/4","1/2"],["1/3 de 12","4"],["÷ une fraction","× son inverse"]],
+  ["1/2 × 1/3 = 1/6.","2/3 de 15 = 15 × 2/3 = 10.","3/4 ÷ 3/8 = 3/4 × 8/3 = 2."],
+  [Q("1/2 × 1/5 =",["1/10","2/7","1/7"],0),Q("Inverse de 2/5 ?",["5/2","2/5","−2/5"],0),T("Combien font 2/3 de 9 ?","6")],
+  "Expliquez comment diviser 1/2 par 1/4.",
+  [Q("3/5 × 1/2 =",["3/10","4/7","3/7"],0),Q("1/2 ÷ 1/4 =",["2","1/8","1/2"],0),T("Combien font 1/4 de 40 ?","10"),Q("Diviser par 3/4 revient à multiplier par…",["3/4","4/3","−3/4"],1),T("2/5 × 5/2 = ?","1")]));
+
+add("maths", 5, C("<h2>Problèmes avec des fractions</h2><p>Méthode : 1) repérer le <b>tout</b> ; 2) traduire « la moitié, le tiers, les 3/4 de… » en multiplication ; 3) vérifier avec un ordre de grandeur.</p><div class='key'>« Les 3/5 de 40 » = 40 × 3/5 = 24.</div>",
+  [["Le tout","la quantité de départ"],["La moitié","1/2"],["Le tiers","1/3"],["Les 3/4 de 20","15"],["Le reste","tout − partie"]],
+  ["La moitié de 30 est 15.","Les 3/5 de 40 sont 24.","Léa dépense 1/4 de 60 €, puis 1/3 du reste : 15 € puis 15 €. Il lui reste 30 €."],
+  [Q("Le tiers de 24 ?",["6","8","12"],1),T("Les 3/4 de 20 ?","15"),Q("Il reste 2/5 de 50 €. Combien ?",["10 €","20 €","25 €"],1)],
+  "Énoncez et résolvez à voix haute un problème avec « les 2/3 de 30 ».",
+  [Q("La moitié de 50 ?",["20","25","30"],1),T("Les 2/3 de 30 ?","20"),Q("Livre de 200 pages, tu en lis 1/4. Reste ?",["50","150","100"],1),T("Le cinquième de 35 ?","7"),Q("Les 3/10 de 100 ?",["30","3","33"],0)]));
+
+addModule("maths", "Module 2 — Pourcentages et proportionnalité", "Calculer un pourcentage|Augmentation et réduction|Proportionnalité|Échelles et vitesses|Problèmes");
+
 const PARCOURS = MODS[new URLSearchParams(location.search).get("t")] || MODS.chinois;

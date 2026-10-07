@@ -9,7 +9,7 @@ const THEMES = [
     page: "anglais.html", pct: "pAng", meta: "6 modules · 30 cours · évaluations",
     lecons: [], evaluations: [] },
   { id: "chinois", nom: "Chinois", desc: "Mandarin : pinyin, tons, vocabulaire du quotidien",
-    page: "module.html?t=chinois", pct: "pm-chinois", meta: "Parcours progressif · évaluations",
+    page: "chinois.html", pct: "pm-chinois", meta: "Parcours A0 → C2 · évaluations",
     lecons: [], evaluations: [] },
   { id: "espagnol", nom: "Espagnol", desc: "Parlez et comprenez l'espagnol pas à pas",
     page: "module.html?t=espagnol", pct: "pm-espagnol", meta: "Parcours progressif · évaluations",
