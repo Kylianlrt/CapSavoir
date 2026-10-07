@@ -1,4 +1,3 @@
-// ====== CONFIGURATION GOOGLE : collez ici votre ID client OAuth ======
 const CLIENT_ID = "9725882238-97bupsrp5ok24k93u11n36nd5588eauc.apps.googleusercontent.com";
 const SESSION_JOURS = 7;
 let USER = null;
