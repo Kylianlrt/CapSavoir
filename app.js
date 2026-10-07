@@ -89,10 +89,10 @@ function home() {
     : `<div><strong>Bravo, toutes les leçons sont terminées.</strong><span class="mut">Passez les évaluations pour consolider.</span></div>`;
   $("#app").innerHTML = `<div class="resume">${resume}</div>
   <div class="sec-h" id="themes"><h2>Choisissez un thème</h2><span class="mut">${THEMES.length} thèmes · ${L.length} leçons</span></div>
-  <div class="tgrid">${THEMES.map((t, ti) => { const m = iconOf(t.id), q = pct(t);
+  ${catsAll().map(cat => `<h3 class="cat">${cat.nom}</h3><div class="tgrid">${cat.themes.map(theme).filter(Boolean).map((t, ti) => { const m = iconOf(t.id), q = pct(t);
     return `<a class="tcard" style="--c:${m.c};--i:${ti}" href="${t.page || "theme.html?t=" + t.id}"><span class="ico">${m.svg}</span><h3>${t.nom}</h3><p>${t.desc}</p>
     <span class="mut">${t.meta || t.lecons.length + " leçon" + (t.lecons.length > 1 ? "s" : "") + " · " + t.evaluations.length + " évaluation" + (t.evaluations.length > 1 ? "s" : "")}</span>
-    <div class="bar"><i style="width:${q}%"></i></div><div class="row"><span class="mut">${q} % terminé</span><span class="go">${q ? "Continuer" : "Commencer"} →</span></div></a>`; }).join("")}</div>`;
+    <div class="bar"><i style="width:${q}%"></i></div><div class="row"><span class="mut">${q} % terminé</span><span class="go">${q ? "Continuer" : "Commencer"} →</span></div></a>`; }).join("")}</div>`).join("")}`;
 }
 
 function themePage() {

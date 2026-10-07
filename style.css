@@ -153,3 +153,5 @@ header nav{align-items:center}
 .path li:nth-child(12){animation-delay:0.6s}
 .path li:nth-child(13){animation-delay:0.65s}
 .path li:nth-child(14){animation-delay:0.7s}
+
+h3.cat{font-size:1.15rem;margin:38px 0 14px;padding-left:12px;border-left:4px solid var(--acc)}
