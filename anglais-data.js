@@ -177,3 +177,82 @@ e1: {
   ]
 }
 };
+
+/* ===== Module 2 : cours 6 à 8 ===== */
+Object.assign(CONTENT, {
+6: {
+  l: "<p>Le <b>Present Simple</b> exprime les habitudes, les vérités générales et les emplois du temps. À la 3<sup>e</sup> personne du singulier (<i>he, she, it</i>), le verbe prend un <b>-s</b>.</p><table><tr><th>Règle</th><th>Exemple</th></tr><tr><td>Cas général : + s</td><td>work → works</td></tr><tr><td>-ch, -sh, -s, -x, -o : + es</td><td>watch → watches, go → goes</td></tr><tr><td>consonne + y : -ies</td><td>study → studies</td></tr></table><div class='key'><b>Négation :</b> do/does + not + verbe de base → <i>She doesn't like tea.</i><br><b>Question :</b> Do/Does + sujet + verbe de base → <i>Does he work here ?</i><br>Le -s disparaît avec <i>does</i>.</div><p><b>Adverbes de fréquence</b> : always, usually, often, sometimes, never. Ils se placent <b>avant</b> le verbe, mais <b>après</b> to be : <i>I always drink tea. She is never late.</i></p>",
+  v: [["wake up","se réveiller"],["get up","se lever"],["usually","d'habitude"],["never","jamais"],["every day","tous les jours"],["sometimes","parfois"],["breakfast","petit-déjeuner"],["commute","trajet domicile-travail"]],
+  x: ["I get up at seven every day.", "She usually drinks coffee, but he never drinks it.", "My brother studies medicine and he often works late at the hospital."],
+  ex: [
+    { q: "He ___ to school by bike. (go)", a: ["goes"] }, { q: "She ___ English. (study)", a: ["studies"] }, { q: "My dad ___ the news every evening. (watch)", a: ["watches"] },
+    { q: "Négation : « He likes fish. »", a: ["He doesn't like fish", "He does not like fish"] },
+    { q: "Question : « They live in Paris. »", a: ["Do they live in Paris"] },
+    { say: "She never eats meat.", q: "Écoutez et écrivez la phrase.", a: ["She never eats meat"] }
+  ],
+  oral: "Décrivez votre <b>journée type</b> à voix haute pendant 1 minute, avec au moins 4 adverbes de fréquence.<br><i>I usually wake up at 7. I never skip breakfast…</i>",
+  ev: [
+    { q: "She ___ to work by bus.", o: ["go", "goes", "going"], c: 1 },
+    { q: "He ___ TV on Mondays.", o: ["don't watch", "doesn't watch", "doesn't watches"], c: 1, e: "Après does/doesn't, le verbe reste à la forme de base." },
+    { q: "Traduisez : « Il se lève à sept heures. »", a: ["He gets up at seven", "He gets up at 7", "He gets up at seven o'clock", "He gets up at 7 o'clock"] },
+    { q: "Question : « They play tennis. »", a: ["Do they play tennis"] },
+    { q: "3e personne : study", a: ["studies"] },
+    { q: "Where ___ she live ?", o: ["do", "does", "is"], c: 1 },
+    { q: "Quel est l'ordre correct ?", o: ["I drink always tea.", "I always drink tea.", "Always I drink tea."], c: 1 },
+    { q: "Corrigez : « She don't like coffee. »", a: ["She doesn't like coffee", "She does not like coffee"] },
+    { q: "Traduisez : « Elle ne mange jamais de viande. »", a: ["She never eats meat"] },
+    { q: "3e personne : watch", a: ["watches"] }
+  ]
+},
+7: {
+  l: "<p>Le <b>Present Perfect</b> (<i>have / has + participe passé</i>) relie le passé au présent : on s'intéresse au <b>résultat</b> ou à l'<b>expérience</b>, pas au moment précis.</p><table><tr><th>Emploi</th><th>Exemple</th></tr><tr><td>Expérience de vie</td><td>I have been to Spain.</td></tr><tr><td>Résultat présent</td><td>She has lost her keys.</td></tr><tr><td>Durée jusqu'à maintenant</td><td>We have lived here for ten years.</td></tr></table><div class='key'><b>for</b> + durée (for two years) · <b>since</b> + point de départ (since 2019).<br><b>Marqueurs :</b> ever, never, already, yet, just, recently.<br><b>Interdit</b> avec un moment passé précis (yesterday, last week, in 2010) : on utilise alors le Past Simple.</div><p>Participes irréguliers à connaître : go → gone, be → been, see → seen, write → written, eat → eaten, do → done.</p>",
+  v: [["ever","déjà (dans une question)"],["never","jamais"],["already","déjà"],["yet","encore / déjà (question, négation)"],["just","à l'instant"],["for","pendant"],["since","depuis"],["experience","expérience"]],
+  x: ["I have seen this film.", "She has already finished her homework, but he hasn't started yet.", "They have lived in London since 2018, and they have never wanted to leave."],
+  ex: [
+    { q: "I ___ never been to Rome. (have/has)", a: ["have"] }, { q: "She ___ already left. (have/has)", a: ["has"] },
+    { q: "Participe passé : write", a: ["written"] }, { q: "Participe passé : eat", a: ["eaten"] },
+    { q: "Négation : « He has finished. »", a: ["He hasn't finished", "He has not finished"] },
+    { q: "Question : « You have seen it. »", a: ["Have you seen it"] },
+    { q: "We have lived here ___ 2015. (for/since)", a: ["since"] },
+    { say: "I have just finished.", q: "Écoutez et écrivez la phrase.", a: ["I have just finished", "I've just finished"] }
+  ],
+  oral: "Parlez pendant <b>1 minute</b> de vos expériences : trois choses que vous avez déjà faites et deux que vous n'avez jamais faites.<br><i>I have visited Italy. I have never eaten sushi…</i>",
+  ev: [
+    { q: "I ___ never been to London.", o: ["have", "has", "am"], c: 0 },
+    { q: "She ___ already finished.", o: ["have", "has", "is"], c: 1 },
+    { q: "Participe passé : write", a: ["written"] },
+    { q: "I have lived here ___ 2019.", o: ["for", "since", "during"], c: 1 },
+    { q: "We have lived here ___ ten years.", o: ["for", "since"], c: 0 },
+    { q: "Traduisez : « J'ai déjà mangé. »", a: ["I have already eaten", "I've already eaten", "I have eaten already", "I've eaten already"] },
+    { q: "Négation : « He has finished. »", a: ["He hasn't finished", "He has not finished"] },
+    { q: "Question : « You have seen this film. »", a: ["Have you seen this film"] },
+    { q: "Quelle phrase est correcte ?", o: ["I have seen him yesterday.", "I saw him yesterday.", "I have saw him yesterday."], c: 1, e: "Avec « yesterday » (moment précis), on emploie le Past Simple." },
+    { q: "Traduisez : « Elle n'est jamais allée en Chine. »", a: ["She has never been to China", "She's never been to China"] }
+  ]
+},
+8: {
+  l: "<p>Le <b>Present Perfect Continuous</b> (<i>have / has + been + verbe-ing</i>) insiste sur la <b>durée</b> d'une action commencée dans le passé et encore en cours, ou tout juste terminée avec un résultat visible.</p><table><tr><th>Emploi</th><th>Exemple</th></tr><tr><td>Action qui continue</td><td>I have been waiting for an hour.</td></tr><tr><td>Résultat visible</td><td>She is tired : she has been running.</td></tr></table><div class='key'><b>Question :</b> <i>How long have you been learning English ?</i><br><b>Négation :</b> <i>We haven't been sleeping well.</i><br>Les verbes d'état (know, like, be…) ne se mettent pas à la forme en -ing : <i>I have known him for years.</i></div><p><b>Perfect ou Continuous ?</b> <i>I have read this book</i> (c'est fait) · <i>I have been reading this book</i> (je suis dedans, depuis un moment).</p>",
+  v: [["wait","attendre"],["for hours","pendant des heures"],["since morning","depuis ce matin"],["lately","dernièrement"],["how long","depuis combien de temps"],["run","courir"],["rain","pleuvoir"],["learn","apprendre"]],
+  x: ["I have been waiting for an hour.", "It has been raining since this morning, so we have been staying at home.", "She has been working here for five years and she has been learning Spanish lately."],
+  ex: [
+    { q: "I have been ___ for two hours. (wait)", a: ["waiting"] }, { q: "She ___ been working since 8. (have/has)", a: ["has"] },
+    { q: "How long ___ you been living here ? (have/has)", a: ["have"] },
+    { q: "Négation : « We have been waiting. »", a: ["We haven't been waiting", "We have not been waiting"] },
+    { q: "Question : « He has been sleeping. »", a: ["Has he been sleeping"] },
+    { say: "It has been raining all day.", q: "Écoutez et écrivez la phrase.", a: ["It has been raining all day", "It's been raining all day"] }
+  ],
+  oral: "Expliquez à voix haute pendant <b>1 minute</b> ce que vous faites depuis longtemps : études, travail, sport, loisirs.<br><i>I have been learning English for two years…</i>",
+  ev: [
+    { q: "I have been ___ for two hours.", o: ["wait", "waiting", "waited"], c: 1 },
+    { q: "She ___ been working since 8.", o: ["have", "has", "is"], c: 1 },
+    { q: "Traduisez : « Il pleut depuis ce matin. »", a: ["It has been raining since this morning", "It's been raining since this morning"] },
+    { q: "How long ___ you been learning English ?", o: ["have", "has", "did"], c: 0 },
+    { q: "Question : « He has been sleeping. »", a: ["Has he been sleeping"] },
+    { q: "Négation : « We have been waiting. »", a: ["We haven't been waiting", "We have not been waiting"] },
+    { q: "Quelle phrase insiste sur la durée ?", o: ["I have read this book.", "I have been reading this book for a week.", "I read this book."], c: 1 },
+    { q: "They ___ been playing since noon.", o: ["have", "has"], c: 0 },
+    { q: "Traduisez : « Nous travaillons ici depuis cinq ans. »", a: ["We have been working here for five years", "We've been working here for five years"] },
+    { q: "I'm tired because I ___ running.", o: ["have been", "has been", "was"], c: 0 }
+  ]
+}
+});
