@@ -15,7 +15,8 @@
   // Robustesse : évaluation reconstituée depuis les exercices si absente, barème ramené à 20 points
   flat.forEach(c => { const k = c.c; if (!k) return; if (!k.ev && k.ex) k.ev = k.ex.map(q => ({ ...q }));
     if (k.ev && k.ev.length) { const d = 20 / k.ev.reduce((s, q) => s + (q.p ?? 1), 0); k.ev = k.ev.map(q => ({ ...q, p: (q.p ?? 1) * d })); } });
-  const unlocked = i => i === 0 || !!(P[flat[i - 1].id] || {}).passed;
+  const REV = () => { try { return localStorage.getItem("cs-rev") !== "0"; } catch (e) { return true; } };
+  const unlocked = i => i === 0 || REV() || !!(P[flat[i - 1].id] || {}).passed;
   const commit = () => { S[CFG.pct] = flat.filter(c => (P[c.id] || {}).passed).length / flat.length; save(); };
   const norm = s => (s || "").toLowerCase().replace(/[’‘]/g, "'").replace(/[.!?]+$/, "").replace(/\s+/g, " ").trim();
   const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
@@ -37,8 +38,9 @@
     root.innerHTML = `<section class="ph"><div><span class="eyebrow">${CFG.eyebrow}</span><h1>${CFG.titre}</h1>
     <p class="lead">${CFG.lead}</p></div>
     <div class="ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="${R}" class="rb"/><circle cx="60" cy="60" r="${R}" class="rf" stroke-dasharray="${C}" stroke-dashoffset="${C * (1 - frac)}" transform="rotate(-90 60 60)"/></svg><b>${Math.round(frac * 100)} %</b></div></section>
-    <div class="kpis"><div><b>${done.length}/${flat.length}</b><span>étapes réussies</span></div><div><b>${avg}</b><span>moyenne /20</span></div><div><b>${SEUIL}/20</b><span>pour avancer</span></div></div>`
+    <div class="kpis"><div><b>${done.length}/${flat.length}</b><span>étapes réussies</span></div><div><b>${avg}</b><span>moyenne /20</span></div><div><b>${SEUIL}/20</b><span>pour avancer</span></div></div><p><button id="rev">${REV() ? "Réactiver" : "Désactiver"} le déblocage progressif (15/20 pour avancer)</button></p>`
     + CFG.plan.map((m, mi) => `<section class="mod" style="--c:${MODC[mi % MODC.length]}"><h2>${m[0]}</h2><ol class="path">${flat.map((c, i) => c.mi === mi ? node(c, i) : "").join("")}</ol></section>`).join("");
+    $("#rev").onclick = () => { try { localStorage.setItem("cs-rev", REV() ? "0" : "1"); } catch (e) {} map(); };
   }
 
   /* ---------- Questions ---------- */

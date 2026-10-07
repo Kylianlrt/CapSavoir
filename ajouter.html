@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajouter un cours · Cap Savoir</title><link rel="stylesheet" href="style.css">
+<style>main{max-width:860px;margin:0 auto;padding:24px 18px 60px}label{display:block;font-weight:700;margin:16px 0 4px}small{font-weight:400;color:var(--mut)}textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:.9rem}pre{background:#0e1420;color:#e7eef4;padding:14px;border-radius:10px;overflow:auto;white-space:pre-wrap;font-size:.85rem}.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.g{grid-template-columns:1fr}}</style></head>
+<body><main>
+<h1>Ajouter un cours en 30 secondes</h1>
+<p class="mut">Remplissez, copiez le bloc généré, collez-le dans <code>module-contenu.js</code> sous « AJOUTEZ VOS COURS ICI », puis Ctrl+F5.</p>
+<div class="g"><div><label>Thème</label><select id="t" style="width:100%;padding:10px"><option>espagnol</option><option>francais</option><option>orthographe</option><option>coderoute</option><option>culture</option><option>histoire</option><option>maths</option></select></div>
+<div><label>Module <small>(facultatif)</small></label><input id="m" placeholder="Module 2 — Le quotidien"></div></div>
+<label>Titre du cours</label><input id="ti" placeholder="Les verbes en -ar">
+<label>Leçon <small>(« ## » = titre · « ! » = encadré À retenir · **gras**)</small></label><textarea id="l" rows="6"></textarea>
+<label>Vocabulaire <small>(mot = traduction, une par ligne)</small></label><textarea id="v"></textarea>
+<label>Exemples <small>(3 lignes : simple, moyenne, avancée)</small></label><textarea id="x"></textarea>
+<label>Exercices <small>(QCM : Question | Bonne* | Autre | Autre — Libre : Question = réponse / variante)</small></label><textarea id="e" rows="5"></textarea>
+<label>Consigne orale</label><input id="o">
+<label>Évaluation <small>(facultatif : sinon reprend les exercices)</small></label><textarea id="ev"></textarea>
+<p><button class="p" id="cp">Copier le bloc</button> <button id="ex">Remplir un exemple</button></p>
+<pre id="out"></pre>
+</main>
+<script>
+const $=s=>document.querySelector(s),L=id=>$(id).value.split("\n").map(s=>s.trim()).filter(Boolean).join("\n");
+const esc=s=>s.replace(/\\/g,"\\\\").replace(/`/g,"\\`").replace(/\$\{/g,"\\${");
+function gen(){let q=(id,tag)=>{const v=L(id);return v?`@${tag}\n${v}\n`:""};
+ const r=`cours("${$("#t").value}", \`\n${$("#m").value.trim()?"=== "+$("#m").value.trim()+"\n":""}--- ${$("#ti").value.trim()||"Titre du cours"}\n${L("#l")}\n${q("#v","vocab")}${q("#x","exemples")}${q("#e","exercices")}${$("#o").value.trim()?"@oral\n"+$("#o").value.trim()+"\n":""}${q("#ev","eval")}\`);`;
+ $("#out").textContent=esc(r).replace(/^cours\("(\w+)", \\`/,'cours("$1", `').replace(/\\`\);$/,'`);');}
+document.querySelectorAll("input,textarea,select").forEach(e=>e.oninput=gen);gen();
+$("#cp").onclick=()=>{navigator.clipboard.writeText($("#out").textContent);$("#cp").textContent="Copié ✓"};
+$("#ex").onclick=()=>{$("#ti").value="Les verbes en -er";$("#l").value="## Présent\nLes verbes en **-er** se terminent par -e, -es, -e, -ons, -ez, -ent.\n! Chanter : je chante.";$("#v").value="chanter = je chante\nparler = ils parlent";$("#x").value="Je parle.\nTu aimes le chocolat.\nNous mangeons à midi.";$("#e").value="Nous ___ (chanter) = chantons\nIls parl___ | -ent* | -es | -ez";$("#o").value="Conjuguez parler à voix haute.";gen()};
+</script></body></html>
