@@ -85,7 +85,15 @@ if (typeof catsAll === "undefined") {
     return G.map(([nom, themes]) => ({ nom, themes: themes.filter(i => THEMES.some(t => t.id === i)) })).filter(c => c.themes.length);
   };
 }
-
+if (typeof catsAll === "undefined") {
+  window.catsAll = () => {
+    const G = [["Langues", ["anglais", "chinois", "espagnol", "francais", "orthographe"]], ["Informatique", ["cybersecurite"]],
+      ["Culture et société", ["culture", "histoire", "politique", "eloquence"]], ["Sciences et mathématiques", ["maths", "sciences"]], ["Permis", ["coderoute"]]];
+    const used = new Set(G.flatMap(g => g[1])), rest = THEMES.map(t => t.id).filter(i => !used.has(i));
+    if (rest.length) G.push(["Autres", rest]);
+    return G.map(([nom, themes]) => ({ nom, themes: themes.filter(i => THEMES.some(t => t.id === i)) })).filter(c => c.themes.length);
+  };
+}
 function home() {
   if (!USER) return loginView();
   const L = THEMES.flatMap(t => t.lecons.map(l => ({ t, l, k: key(t.id, l.id) })));
