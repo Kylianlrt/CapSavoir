@@ -37,12 +37,12 @@
   const qHTML = (q, i, p) => `<div class="q"><p class="qt"><span class="qn">${i + 1}</span>${q.say ? `<button class="spk" data-say="${q.say}">🔊 Écouter</button> ` : ""}${q.q}</p>${q.o
     ? q.o.map((o, j) => `<label class="opt"><input type="radio" name="${p}${i}" value="${j}"> ${o}</label>`).join("")
     : `<input class="ans" name="${p}${i}" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Votre réponse">`}<div class="res"></div></div>`;
-  function grade(qs, p, box) {
+  function grade(qs, p, box, d = 1) {
     let r = 0;
     qs.forEach((q, i) => {
       const el = box.querySelectorAll(".q")[i], inp = q.o ? el.querySelector("input:checked") : el.querySelector("input"), v = inp ? inp.value : "";
       const g = q.o ? v !== "" && +v === q.c : q.a.some(a => norm(a) === norm(v));
-      if (g) r++;
+      if (g) r += q.p ?? d;
       el.classList.add(g ? "g" : "b");
       el.querySelector(".res").innerHTML = (g ? "✓ Correct" : "✗ Réponse attendue : <b>" + (q.o ? q.o[q.c] : q.a[0]) + "</b>") + (q.e ? ` <em>${q.e}</em>` : "");
       el.querySelectorAll("input").forEach(x => x.disabled = true);
@@ -53,8 +53,8 @@
   /* ---------- Page d'un cours ---------- */
   function course(i) {
     const c = flat[i], k = c.c; let step = 0;
-    root.innerHTML = `<a href="#" class="back">← Retour au parcours</a><header class="ch" style="--c:${MODC[c.mi]}"><span class="eyebrow">${c.mt}</span><h1>Cours ${c.num} — ${c.t}</h1></header>
-    <nav class="tabs" aria-label="Étapes du cours">${STEPS.map((t, j) => `<button data-s="${j}">${j + 1}. ${t}</button>`).join("")}</nav><section id="st" class="stage"></section>`;
+    root.innerHTML = `<a href="#" class="back">← Retour au parcours</a><header class="ch" style="--c:${MODC[c.mi]}"><span class="eyebrow">${c.mt}</span><h1>${c.ex ? "" : "Cours " + c.num + " — "}${c.t}</h1></header>
+    <nav class="tabs" aria-label="Étapes du cours"${c.ex ? ' style="display:none"' : ""}>${STEPS.map((t, j) => `<button data-s="${j}">${j + 1}. ${t}</button>`).join("")}</nav><section id="st" class="stage"></section>`;
     const st = $("#st"), tabs = [...document.querySelectorAll(".tabs button")];
     const nav = () => `<div class="actions">${step > 0 ? '<button data-go="-1">← Précédent</button>' : "<span></span>"}${step < 5 ? '<button class="p" data-go="1">Suivant →</button>' : ""}</div>`;
     function show(s) {
@@ -70,7 +70,7 @@
     }
     function intro() {
       const p = P[c.id] || {};
-      st.innerHTML = `<div class="sc"><span class="tag">Évaluation</span><h2>10 questions · 20 points</h2><p>Réussite à partir de <b>${SEUIL}/20</b>.${p.tries ? ` Meilleur score : <b>${p.best}/20</b>.` : ""}</p><button class="p" id="go">Commencer l'évaluation</button></div>${nav()}`;
+      st.innerHTML = `<div class="sc"><span class="tag">Évaluation</span><h2>${k.ev.length} questions · 20 points</h2><p>Réussite à partir de <b>${SEUIL}/20</b>.${p.tries ? ` Meilleur score : <b>${p.best}/20</b>.` : ""}</p><button class="p" id="go">Commencer l'évaluation</button></div>${c.ex ? "" : nav()}`;
       $("#go").onclick = start;
     }
     function start() {
@@ -78,12 +78,12 @@
       st.innerHTML = qs.map((q, j) => qHTML(q, j, "e")).join("") + `<div class="actions"><button class="p" id="vl">Valider l'évaluation</button></div>`;
       window.scrollTo({ top: 0 });
       $("#vl").onclick = () => {
-        const pts = grade(qs, "e", st) * 2, p = (P[c.id] = P[c.id] || { best: 0, tries: 0 });
+        const pts = grade(qs, "e", st, 2), p = (P[c.id] = P[c.id] || { best: 0, tries: 0 });
         p.tries++; p.best = Math.max(p.best, pts); if (pts >= SEUIL) p.passed = true; commit();
-        const v = pts >= SEUIL ? ["ok", "Bravo, étape validée.", "Vous pouvez passer à la suite."] : pts >= 12 ? ["mid", "Presque !", "Révisez rapidement la leçon, puis repassez l'évaluation."] : ["ko", "Pas encore acquis.", "Refaites les exercices du cours avant de réessayer."];
+        const v = pts >= SEUIL ? ["ok", "Bravo, étape validée.", "Vous pouvez passer à la suite."] : pts >= 12 ? ["mid", "Presque !", "Révisez rapidement la leçon, puis repassez l'évaluation."] : ["ko", "Pas encore acquis.", c.ex ? "Révisez les cours du module avant de repasser l'examen." : "Refaites les exercices du cours avant de réessayer."];
         const nx = flat[i + 1], nxOk = pts >= SEUIL && nx && nx.c;
         $("#vl").parentElement.outerHTML = `<div class="sc ${v[0]}"><div class="n">${pts}<small>/20</small></div><h2>${v[1]}</h2><p>${v[2]}</p></div>
-        <div class="actions"><button data-s="0">Revoir la leçon</button><button id="rt">Repasser l'évaluation</button>${nxOk ? `<a class="btn p" href="#c${nx.id}">Cours suivant →</a>` : `<a class="btn p" href="#">Retour au parcours</a>`}</div>`;
+        <div class="actions">${c.ex ? "" : '<button data-s="0">Revoir la leçon</button>'}<button id="rt">Repasser l'évaluation</button>${nxOk ? `<a class="btn p" href="#c${nx.id}">Cours suivant →</a>` : `<a class="btn p" href="#">Retour au parcours</a>`}</div>`;
         $("#rt").onclick = start; window.scrollTo({ top: 0 });
       };
     }
@@ -91,7 +91,7 @@
       const b = e.target.closest("[data-s]"), g = e.target.closest("[data-go]");
       if (b) show(+b.dataset.s); else if (g) show(step + +g.dataset.go);
     };
-    show(0);
+    show(c.ex ? 5 : 0);
   }
 
   /* ---------- Routage ---------- */
