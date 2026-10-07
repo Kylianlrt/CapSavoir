@@ -1,5 +1,5 @@
 // ====== CONFIGURATION GOOGLE : collez ici votre ID client OAuth ======
-const CLIENT_ID = "VOTRE_ID_CLIENT.apps.googleusercontent.com";
+const CLIENT_ID = "9725882238-97bupsrp5ok24k93u11n36nd5588eauc.apps.googleusercontent.com";
 const SESSION_JOURS = 7;
 let USER = null;
 try { USER = JSON.parse(localStorage.getItem("cs-user") || "null"); if (USER && USER.exp * 1000 < Date.now()) USER = null; } catch (e) {}
