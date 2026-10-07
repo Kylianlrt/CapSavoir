@@ -18,6 +18,14 @@ const pdfView = p => `<iframe src="${p}" title="Document PDF"></iframe><p class=
 
 const SITE = "Cap Savoir"; // nom du site : modifiez-le ici
 const ICON = {
+  chinois: ["#dc2626", '<path d="M12 3v18M5 8h14M7 13h10M9 18h6"/>'],
+  espagnol: ["#ea580c", '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>'],
+  francais: ["#2563eb", '<path d="M5 4h14v16H5z"/><path d="M8 9h8M8 13h8M8 17h4"/>'],
+  orthographe: ["#db2777", '<path d="M4 19l5-14 5 14M6 14h6"/><path d="M16 14l3 3 3-5"/>'],
+  coderoute: ["#ca8a04", '<path d="M8 3h8l5 5v8l-5 5H8l-5-5V8z"/><path d="M8 12h8"/>'],
+  culture: ["#0891b2", '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>'],
+  histoire: ["#92400e", '<path d="M5 21h14M7 21V8l5-5 5 5v13M10 21v-6h4v6"/>'],
+  maths: ["#4f46e5", '<path d="M6 6h12M6 18h12M8 10l8 4M16 10l-8 4"/>'],
   cybersecurite: ["#1d4ed8", '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/>'],
   anglais: ["#c2410c", '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>'],
   eloquence: ["#7c3aed", '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>'],
@@ -81,8 +89,8 @@ function home() {
     : `<div><strong>Bravo, toutes les leçons sont terminées.</strong><span class="mut">Passez les évaluations pour consolider.</span></div>`;
   $("#app").innerHTML = `<div class="resume">${resume}</div>
   <div class="sec-h" id="themes"><h2>Choisissez un thème</h2><span class="mut">${THEMES.length} thèmes · ${L.length} leçons</span></div>
-  <div class="tgrid">${THEMES.map(t => { const m = iconOf(t.id), q = pct(t);
-    return `<a class="tcard" style="--c:${m.c}" href="${t.page || "theme.html?t=" + t.id}"><span class="ico">${m.svg}</span><h3>${t.nom}</h3><p>${t.desc}</p>
+  <div class="tgrid">${THEMES.map((t, ti) => { const m = iconOf(t.id), q = pct(t);
+    return `<a class="tcard" style="--c:${m.c};--i:${ti}" href="${t.page || "theme.html?t=" + t.id}"><span class="ico">${m.svg}</span><h3>${t.nom}</h3><p>${t.desc}</p>
     <span class="mut">${t.meta || t.lecons.length + " leçon" + (t.lecons.length > 1 ? "s" : "") + " · " + t.evaluations.length + " évaluation" + (t.evaluations.length > 1 ? "s" : "")}</span>
     <div class="bar"><i style="width:${q}%"></i></div><div class="row"><span class="mut">${q} % terminé</span><span class="go">${q ? "Continuer" : "Commencer"} →</span></div></a>`; }).join("")}</div>`;
 }
@@ -145,3 +153,10 @@ function evalPage() {
 chrome();
 if (!USER && document.body.dataset.page !== "home") location.replace("index.html");
 else ({ home, theme: themePage, cours: coursPage, eval: evalPage })[document.body.dataset.page]?.();
+
+/* Effets : apparition au scroll + halo qui suit la souris */
+if (!matchMedia("(prefers-reduced-motion:reduce)").matches) {
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+  document.querySelectorAll(".tcard,.steps li,.sec-h,.resume,.big,.intro").forEach((el, i) => { el.classList.add("rv"); if (!el.style.getPropertyValue("--i")) el.style.setProperty("--i", i % 4); io.observe(el); });
+  document.addEventListener("pointermove", e => { const c = e.target.closest && e.target.closest(".tcard"); if (c) { const r = c.getBoundingClientRect(); c.style.setProperty("--mx", e.clientX - r.left + "px"); c.style.setProperty("--my", e.clientY - r.top + "px"); } });
+}

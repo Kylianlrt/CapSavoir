@@ -94,3 +94,62 @@ header nav{align-items:center}
 .note{margin:14px 0 0;padding:10px 12px;border-radius:10px;background:rgba(232,168,56,.18);color:#ffe3a8;font-size:.88rem;line-height:1.4}
 .note code{background:rgba(255,255,255,.12);padding:1px 5px;border-radius:4px}
 @media(max-width:560px){.uname{display:none}header nav a{display:none}.user{border:0;padding:0}}
+/* ===== Animations & finitions ===== */
+@keyframes rise{from{opacity:0;transform:translateY(22px)}}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-30px) scale(1.15)}}
+@keyframes sheen{to{background-position:200% 0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 45%,transparent)}100%{box-shadow:0 0 0 14px transparent}}
+@keyframes draw{from{stroke-dashoffset:327}}
+@keyframes grow{from{width:0!important}}
+@keyframes pop{from{opacity:0;transform:scale(.8)}}
+.hero{position:relative;overflow:hidden;isolation:isolate}
+.hero::before,.hero::after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(70px);opacity:.5;animation:drift 14s ease-in-out infinite}
+.hero::before{width:380px;height:380px;background:#e8a838;left:-80px;top:-120px;opacity:.28}
+.hero::after{width:460px;height:460px;background:#4f7be0;right:-120px;bottom:-200px;animation-delay:-6s}
+.hero h1,.eyebrow,.lead,.cta,.panel{animation:rise .9s cubic-bezier(.2,.7,.2,1) backwards}
+.hero h1{animation-delay:.1s;background:linear-gradient(90deg,#fff 30%,#f0b95b 50%,#fff 70%);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rise .9s .1s backwards,sheen 6s linear 1s infinite}
+.lead{animation-delay:.25s}.cta{animation-delay:.4s}.panel{animation-delay:.5s;backdrop-filter:blur(12px)}
+.mark{animation:spin 12s linear infinite;background:conic-gradient(from 0deg,var(--pri),var(--acc),var(--pri))}
+.btn,button{transition:transform .2s,box-shadow .2s,filter .2s,background .2s}
+.btn:hover,button:hover{transform:translateY(-2px);box-shadow:0 8px 20px -10px rgba(20,33,61,.5)}
+.btn:active,button:active{transform:scale(.97)}
+.btn.acc{box-shadow:0 10px 28px -10px var(--acc)}
+.rv{opacity:0}
+.rv.in{opacity:1;animation:rise .8s cubic-bezier(.2,.7,.2,1) backwards;animation-delay:calc(var(--i,0)*70ms)}
+.tcard{position:relative;overflow:hidden}
+.tcard::before{content:"";position:absolute;inset:0;opacity:0;transition:opacity .3s;pointer-events:none;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),color-mix(in srgb,var(--c) 18%,transparent),transparent 70%)}
+.tcard:hover::before{opacity:1}
+.tcard:hover .ico{transform:rotate(-6deg) scale(1.1)}
+.ico{transition:transform .3s}
+.tcard .bar i,.panel .bar i{animation:grow 1.2s cubic-bezier(.2,.7,.2,1) backwards .3s}
+.go{transition:letter-spacing .2s}.tcard:hover .go{letter-spacing:.04em}
+.steps li{transition:transform .25s}.steps li:hover{transform:translateY(-6px)}
+/* Parcours */
+.ph{animation:rise .7s backwards;box-shadow:0 24px 50px -28px rgba(20,33,61,.7)}
+.rf{animation:draw 1.4s cubic-bezier(.2,.7,.2,1) backwards}
+.kpis div{animation:pop .5s backwards;transition:transform .2s}.kpis div:hover{transform:translateY(-4px)}
+.kpis div:nth-child(2){animation-delay:.1s}.kpis div:nth-child(3){animation-delay:.2s}
+.path li{animation:rise .5s backwards}
+.open .dot{animation:pulse 1.8s infinite}
+.ok .dot{animation:pop .5s backwards}
+.stage{animation:rise .45s backwards}
+.q,.exm,.vc{animation:rise .4s backwards}
+.vc{transition:transform .2s,border-color .2s}.vc:hover{transform:translateY(-3px);border-color:var(--pri)}
+.opt{transition:background .2s,border-color .2s}.opt:hover{background:var(--soft);border-color:var(--pri)}
+.sc .n{animation:pop .6s cubic-bezier(.3,1.6,.5,1) backwards}
+.q.g{animation:pop .35s}
+@media(prefers-reduced-motion:reduce){*,::before,::after{animation:none!important}.rv{opacity:1}}
+.path li:nth-child(2){animation-delay:0.1s}
+.path li:nth-child(3){animation-delay:0.15s}
+.path li:nth-child(4){animation-delay:0.2s}
+.path li:nth-child(5){animation-delay:0.25s}
+.path li:nth-child(6){animation-delay:0.3s}
+.path li:nth-child(7){animation-delay:0.35s}
+.path li:nth-child(8){animation-delay:0.4s}
+.path li:nth-child(9){animation-delay:0.45s}
+.path li:nth-child(10){animation-delay:0.5s}
+.path li:nth-child(11){animation-delay:0.55s}
+.path li:nth-child(12){animation-delay:0.6s}
+.path li:nth-child(13){animation-delay:0.65s}
+.path li:nth-child(14){animation-delay:0.7s}

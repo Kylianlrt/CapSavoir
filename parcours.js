@@ -16,7 +16,7 @@
   const commit = () => { S[CFG.pct] = flat.filter(c => (P[c.id] || {}).passed).length / flat.length; save(); };
   const norm = s => (s || "").toLowerCase().replace(/[’‘]/g, "'").replace(/[.!?]+$/, "").replace(/\s+/g, " ").trim();
   const shuffle = a => a.map(v => [Math.random(), v]).sort((x, y) => x[0] - y[0]).map(x => x[1]);
-  const speak = t => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = "en-GB"; u.rate = .9; speechSynthesis.speak(u); } catch (e) {} };
+  const speak = t => { try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(t); u.lang = CFG.lang || "en-GB"; u.rate = .9; speechSynthesis.speak(u); } catch (e) {} };
   root.addEventListener("click", e => { const b = e.target.closest("[data-say]"); if (b) speak(b.dataset.say); });
 
   /* ---------- Carte du parcours ---------- */
