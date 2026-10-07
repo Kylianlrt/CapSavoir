@@ -10,9 +10,9 @@ const THEMES = [
     evaluations: [
       { id: "e1", titre: "Évaluation 1", pdf: "pdfs/cybersecurite/eval-1.pdf", total: 20 }
     ] },
-  { id: "anglais", nom: "Anglais", desc: "Comprendre et s'exprimer",
-    lecons: [{ id: "l1", titre: "Leçon 1", pdf: "pdfs/anglais/lecon-1.pdf" }],
-    evaluations: [{ id: "e1", titre: "Évaluation 1", pdf: "pdfs/anglais/eval-1.pdf", total: 20 }] },
+  { id: "anglais", nom: "Anglais", desc: "Formation intensive en 30 cours, avec déblocage progressif",
+    page: "anglais.html", meta: "6 modules · 30 cours · évaluations",
+    lecons: [], evaluations: [] },
   { id: "eloquence", nom: "Éloquence", desc: "Convaincre et captiver à l'oral",
     lecons: [{ id: "l1", titre: "Leçon 1", pdf: "pdfs/eloquence/lecon-1.pdf" }],
     evaluations: [{ id: "e1", titre: "Évaluation 1", pdf: "pdfs/eloquence/eval-1.pdf", total: 20 }] },

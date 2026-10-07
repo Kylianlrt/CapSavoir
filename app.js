@@ -1,5 +1,5 @@
 // ====== CONFIGURATION GOOGLE : collez ici votre ID client OAuth ======
-const CLIENT_ID = "9725882238-97bupsrp5ok24k93u11n36nd5588eauc.apps.googleusercontent.com";
+const CLIENT_ID = "VOTRE_ID_CLIENT.apps.googleusercontent.com";
 const SESSION_JOURS = 7;
 let USER = null;
 try { USER = JSON.parse(localStorage.getItem("cs-user") || "null"); if (USER && USER.exp * 1000 < Date.now()) USER = null; } catch (e) {}
@@ -11,7 +11,7 @@ const $ = s => document.querySelector(s);
 const param = n => new URLSearchParams(location.search).get(n);
 const theme = id => THEMES.find(t => t.id === id);
 const key = (t, l) => t + ":" + l;
-const pct = t => Math.round(100 * t.lecons.filter(l => S.done[key(t.id, l.id)]).length / (t.lecons.length || 1));
+const pct = t => t.page ? Math.round(100 * (S.pAng || 0)) : Math.round(100 * t.lecons.filter(l => S.done[key(t.id, l.id)]).length / (t.lecons.length || 1));
 const isDue = k => { const d = S.done[k]; return !!(d && d.next && d.next <= Date.now()); };
 const best = k => (S.scores[k] || []).reduce((m, s) => Math.max(m, Math.round(100 * s.score / s.total)), null);
 const pdfView = p => `<iframe src="${p}" title="Document PDF"></iframe><p class="mut"><a href="${p}" target="_blank" rel="noopener">Ouvrir le PDF dans un nouvel onglet</a></p>`;
@@ -82,8 +82,8 @@ function home() {
   $("#app").innerHTML = `<div class="resume">${resume}</div>
   <div class="sec-h" id="themes"><h2>Choisissez un thème</h2><span class="mut">${THEMES.length} thèmes · ${L.length} leçons</span></div>
   <div class="tgrid">${THEMES.map(t => { const m = iconOf(t.id), q = pct(t);
-    return `<a class="tcard" style="--c:${m.c}" href="theme.html?t=${t.id}"><span class="ico">${m.svg}</span><h3>${t.nom}</h3><p>${t.desc}</p>
-    <span class="mut">${t.lecons.length} leçon${t.lecons.length > 1 ? "s" : ""} · ${t.evaluations.length} évaluation${t.evaluations.length > 1 ? "s" : ""}</span>
+    return `<a class="tcard" style="--c:${m.c}" href="${t.page || "theme.html?t=" + t.id}"><span class="ico">${m.svg}</span><h3>${t.nom}</h3><p>${t.desc}</p>
+    <span class="mut">${t.meta || t.lecons.length + " leçon" + (t.lecons.length > 1 ? "s" : "") + " · " + t.evaluations.length + " évaluation" + (t.evaluations.length > 1 ? "s" : "")}</span>
     <div class="bar"><i style="width:${q}%"></i></div><div class="row"><span class="mut">${q} % terminé</span><span class="go">${q ? "Continuer" : "Commencer"} →</span></div></a>`; }).join("")}</div>`;
 }
 
@@ -144,4 +144,4 @@ function evalPage() {
 
 chrome();
 if (!USER && document.body.dataset.page !== "home") location.replace("index.html");
-else ({ home, theme: themePage, cours: coursPage, eval: evalPage })[document.body.dataset.page]();
+else ({ home, theme: themePage, cours: coursPage, eval: evalPage })[document.body.dataset.page]?.();
