@@ -12,6 +12,9 @@
     const ex = /^Examen du/.test(t), id = ex ? "e" + (mi + 1) : String(++n);
     flat.push({ id, t, mi, mt, ex, num: ex ? null : n, c: CFG.content[id] });
   }));
+  // Robustesse : évaluation reconstituée depuis les exercices si absente, barème ramené à 20 points
+  flat.forEach(c => { const k = c.c; if (!k) return; if (!k.ev && k.ex) k.ev = k.ex.map(q => ({ ...q }));
+    if (k.ev && k.ev.length) { const d = 20 / k.ev.reduce((s, q) => s + (q.p ?? 1), 0); k.ev = k.ev.map(q => ({ ...q, p: (q.p ?? 1) * d })); } });
   const unlocked = i => i === 0 || !!(P[flat[i - 1].id] || {}).passed;
   const commit = () => { S[CFG.pct] = flat.filter(c => (P[c.id] || {}).passed).length / flat.length; save(); };
   const norm = s => (s || "").toLowerCase().replace(/[’‘]/g, "'").replace(/[.!?]+$/, "").replace(/\s+/g, " ").trim();
@@ -52,7 +55,7 @@
       el.querySelector(".res").innerHTML = (g ? "✓ Correct" : "✗ Réponse attendue : <b>" + (q.o ? q.o[q.c] : q.a[0]) + "</b>") + (q.e ? ` <em>${q.e}</em>` : "");
       el.querySelectorAll("input").forEach(x => x.disabled = true);
     });
-    return r;
+    return Math.round(r * 10) / 10;
   }
 
   /* ---------- Page d'un cours ---------- */
@@ -72,8 +75,8 @@
       if (s === 4 && !CFG.tech) st.innerHTML = `<div class="oral"><span class="tag">Exercice oral</span><p>${k.oral}</p><div class="key">Astuce : enregistrez-vous avec votre téléphone, réécoutez-vous, puis refaites l'exercice en corrigeant vos erreurs.</div></div>`;
       if (CFG.tech) {
         if (s === 1) st.innerHTML = `<div class="vg">${k.v.map(([t, d]) => `<div class="vc card"><b>${t}</b><span>${d}</span></div>`).join("")}</div>`;
-        if (s === 2) st.innerHTML = `<div class="lab prose"><span class="tag">Lab</span>${k.lab}</div>`;
-        if (s === 4) st.innerHTML = `<div class="lab prose"><span class="tag">Analyse</span>${k.an}</div>`;
+        if (s === 2) st.innerHTML = `<div class="lab prose"><span class="tag">${CFG.t2 || "Lab"}</span>${k.lab}</div>`;
+        if (s === 4) st.innerHTML = `<div class="lab prose"><span class="tag">${CFG.t4 || "Analyse"}</span>${k.an}</div>`;
       }
       if (s === 5) return intro();
       if (s !== 3) st.insertAdjacentHTML("beforeend", nav());

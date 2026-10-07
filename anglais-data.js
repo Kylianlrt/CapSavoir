@@ -256,3 +256,70 @@ Object.assign(CONTENT, {
   ]
 }
 });
+
+/* ===== Module 2 : fin (cours 9, 10, examen) ===== */
+Object.assign(CONTENT, {
+9: {
+  l: "<p>Les quatre temps du présent répondent chacun à une question différente.</p><table><tr><th>Temps</th><th>Idée</th><th>Exemple</th></tr><tr><td>Present Simple</td><td>habitude, vérité générale</td><td>I drink coffee every morning.</td></tr><tr><td>Present Continuous</td><td>action en cours maintenant</td><td>I am drinking coffee.</td></tr><tr><td>Present Perfect</td><td>résultat ou expérience</td><td>I have lost my keys.</td></tr><tr><td>Present Perfect Continuous</td><td>durée jusqu'à maintenant</td><td>I have been working for hours.</td></tr></table><div class='key'><b>Verbes d'état</b> (know, like, want, believe…) : pas de forme en -ing. On dit <i>I know the answer</i>, jamais « I am knowing ».</div>",
+  v: [["every day","tous les jours"],["right now","en ce moment"],["so far","jusqu'ici"],["recently","récemment"],["since","depuis (point de départ)"],["for","depuis / pendant (durée)"],["how long","depuis combien de temps"],["just","à l'instant"]],
+  x: ["I work every day.", "I am working right now, and I have worked here since 2020.", "She has been studying for three hours, so she is tired and she has finished two chapters."],
+  ex: [
+    { q: "Look ! It ___ now. (rain)", a: ["is raining"] }, { q: "She ___ tea every day. (drink)", a: ["drinks"] },
+    { q: "I ___ my phone. I can't find it. (lose)", a: ["have lost", "'ve lost"] },
+    { q: "Corrigez : « I am knowing him. »", a: ["I know him"] },
+    { q: "How long ___ you been waiting ? (have/has)", a: ["have"] },
+    { q: "Traduisez : « Elle vient de partir. »", a: ["She has just left", "She's just left"] }
+  ],
+  oral: "Parlez <b>1 minute</b> de vous en utilisant les 4 temps : habitudes, ce que vous faites maintenant, ce que vous avez déjà fait, ce que vous faites depuis longtemps.",
+  ev: [
+    { q: "I ___ coffee every morning.", o: ["drink", "am drinking", "have drunk"], c: 0 },
+    { q: "Look ! It ___ right now.", o: ["rains", "is raining", "has rained"], c: 1 },
+    { q: "I ___ my keys. I can't find them.", o: ["lose", "am losing", "have lost"], c: 2 },
+    { q: "She is exhausted. She ___ for two hours.", o: ["works", "has been working", "worked"], c: 1 },
+    { q: "Present Perfect Continuous : « They play football. »", a: ["They have been playing football", "They've been playing football"] },
+    { q: "He ___ never ___ sushi.", o: ["has / eaten", "is / eating", "does / eat"], c: 0 },
+    { q: "Traduisez : « Je travaille ici depuis 2020. »", a: ["I have been working here since 2020", "I've been working here since 2020", "I have worked here since 2020", "I've worked here since 2020"] },
+    { q: "Quel temps exprime une habitude ?", o: ["Present Simple", "Present Perfect", "Present Perfect Continuous"], c: 0 },
+    { q: "Corrigez : « I am knowing the answer. »", a: ["I know the answer"], e: "Les verbes d'état n'ont pas de forme en -ing." },
+    { q: "Traduisez : « Elle vient de finir. »", a: ["She has just finished", "She's just finished"] }
+  ]
+},
+10: {
+  l: "<p>Un <b>adjectif</b> décrit un nom, il est invariable et se place avant le nom : <i>a big house</i>. Un <b>adverbe</b> décrit un verbe : on ajoute souvent <b>-ly</b> (<i>quick → quickly</i>). Attention : <i>good → well</i>, et <i>fast, hard, late</i> ne changent pas.</p><table><tr><th>Type</th><th>Comparatif</th><th>Superlatif</th></tr><tr><td>Court : tall</td><td>taller than</td><td>the tallest</td></tr><tr><td>-y : happy</td><td>happier than</td><td>the happiest</td></tr><tr><td>Consonne doublée : big</td><td>bigger than</td><td>the biggest</td></tr><tr><td>Long : interesting</td><td>more interesting than</td><td>the most interesting</td></tr><tr><td>Irrégulier : good / bad</td><td>better / worse</td><td>the best / the worst</td></tr></table><div class='key'><b>Égalité :</b> <i>as tall as</i> · <b>Infériorité :</b> <i>less expensive than</i>.</div>",
+  v: [["quick / quickly","rapide / rapidement"],["good / well","bon / bien"],["cheap","bon marché"],["expensive","cher"],["tall","grand (taille)"],["interesting","intéressant"],["better","meilleur"],["worse","pire"]],
+  x: ["She is tall.", "This car is faster and cheaper than that one.", "It is the most interesting film I have ever seen, and he speaks about it very enthusiastically."],
+  ex: [
+    { q: "Comparatif : tall", a: ["taller"] }, { q: "Comparatif : big", a: ["bigger"] }, { q: "Comparatif : good", a: ["better"] },
+    { q: "Superlatif : happy", a: ["the happiest", "happiest"] },
+    { q: "Corrigez : « She runs quick. »", a: ["She runs quickly"] },
+    { q: "Traduisez : « Il est aussi grand que moi. »", a: ["He is as tall as me", "He's as tall as me", "He is as tall as I am", "He's as tall as I am"] }
+  ],
+  oral: "Comparez <b>à voix haute</b> deux villes, deux personnes et deux objets, avec au moins 6 comparatifs ou superlatifs.",
+  ev: [
+    { q: "She speaks English ___.", o: ["good", "well", "goodly"], c: 1 },
+    { q: "Comparatif : tall", a: ["taller"] },
+    { q: "This book is ___ than that one.", o: ["more interesting", "interestinger", "most interesting"], c: 0 },
+    { q: "Comparatif : good", a: ["better"] },
+    { q: "He is the ___ student in the class.", o: ["tallest", "taller", "most tall"], c: 0 },
+    { q: "Corrigez : « She runs quick. »", a: ["She runs quickly"] },
+    { q: "Superlatif : happy", a: ["the happiest", "happiest"] },
+    { q: "Traduisez : « Il est aussi grand que moi. »", a: ["He is as tall as me", "He's as tall as me", "He is as tall as I am", "He's as tall as I am"] },
+    { q: "Comparatif : big", a: ["bigger"] },
+    { q: "Traduisez : « C'est le film le plus intéressant. »", a: ["It is the most interesting film", "It's the most interesting film", "This is the most interesting film"] }
+  ]
+},
+e2: {
+  ev: [
+    { q: "She ___ to work by bus every day.", o: ["goes", "is going", "has gone"], c: 0 },
+    { q: "3e personne : carry", a: ["carries"] },
+    { q: "I ___ never been to Japan.", o: ["have", "has", "am"], c: 0 },
+    { q: "We have waited ___ nine o'clock.", o: ["for", "since"], c: 1 },
+    { q: "Look ! They ___ football.", o: ["play", "are playing", "have played"], c: 1 },
+    { q: "Traduisez : « Il pleut depuis ce matin. »", a: ["It has been raining since this morning", "It's been raining since this morning"] },
+    { q: "Traduisez : « J'ai déjà fini. »", a: ["I have already finished", "I've already finished", "I have finished already", "I've finished already"] },
+    { q: "This film is ___ than the book.", o: ["better", "gooder", "more good"], c: 0 },
+    { q: "Traduisez : « Elle parle bien anglais. »", a: ["She speaks English well", "She speaks good English"] },
+    { q: "Quelle phrase est correcte ?", o: ["I have seen him last week.", "I saw him last week.", "I have saw him last week."], c: 1, e: "« last week » est un moment précis : Past Simple." }
+  ]
+}
+});
