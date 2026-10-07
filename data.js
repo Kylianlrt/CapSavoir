@@ -40,5 +40,8 @@ const THEMES = [
     evaluations: [{ id: "e1", titre: "Évaluation 1", pdf: "pdfs/politique/eval-1.pdf", total: 20 }] },
   { id: "sciences", nom: "Sciences", desc: "Comprendre le monde",
     lecons: [{ id: "l1", titre: "Leçon 1", pdf: "pdfs/sciences/lecon-1.pdf" }],
-    evaluations: [{ id: "e1", titre: "Évaluation 1", pdf: "pdfs/sciences/eval-1.pdf", total: 20 }] }
+    evaluations: [{ id: "e1", titre: "Évaluation 1", pdf: "pdfs/sciences/eval-1.pdf", total: 20 }] },
+  { id: "italien", nom: "Italien", desc: "Parlez Italien dès maintenant ",
+    page: "module.html?t=italien", pct: "pm-italien", meta: "Parcours progressif · évaluations",
+    lecons: [], evaluations: [] },
 ];
