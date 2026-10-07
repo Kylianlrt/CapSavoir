@@ -1,3 +1,4 @@
+// ====== CONFIGURATION GOOGLE : collez ici votre ID client OAuth ======
 const CLIENT_ID = "9725882238-97bupsrp5ok24k93u11n36nd5588eauc.apps.googleusercontent.com";
 const SESSION_JOURS = 7;
 let USER = null;
@@ -72,6 +73,17 @@ function chrome() {
   if ($("#lo")) $("#lo").onclick = logout;
   document.body.insertAdjacentHTML("beforeend", `<footer><div>© ${new Date().getFullYear()} ${SITE} · Votre progression est enregistrée sur cet appareil.</div>
   <div style="margin-top:6px"><a href="index.html#themes">Thèmes</a><a href="index.html#methode">Méthode</a></div></footer>`);
+}
+
+/* Secours : si data.js ne définit pas catsAll(), on regroupe les thèmes par catégorie */
+if (typeof catsAll === "undefined") {
+  window.catsAll = () => {
+    const G = [["Langues", ["anglais", "chinois", "espagnol", "francais", "orthographe"]], ["Informatique", ["cybersecurite"]],
+      ["Culture et société", ["culture", "histoire", "politique", "eloquence"]], ["Sciences et mathématiques", ["maths", "sciences"]], ["Permis", ["coderoute"]]];
+    const used = new Set(G.flatMap(g => g[1])), rest = THEMES.map(t => t.id).filter(i => !used.has(i));
+    if (rest.length) G.push(["Autres", rest]);
+    return G.map(([nom, themes]) => ({ nom, themes: themes.filter(i => THEMES.some(t => t.id === i)) })).filter(c => c.themes.length);
+  };
 }
 
 function home() {
