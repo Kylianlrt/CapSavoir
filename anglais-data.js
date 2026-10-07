@@ -91,4 +91,89 @@ const CONTENT = {
     { q: "Traduisez : « Ils ne travaillent pas ici. »", a: ["They do not work here", "They don't work here"] }
   ]
 }
+,
+4: {
+  l: "<p>Le <b>present continuous</b> décrit une action <b>en train de se dérouler</b> maintenant, ou une situation temporaire : <i>I am studying English.</i></p><table><tr><th>Forme</th><th>Règle</th><th>Exemple</th></tr><tr><td>Affirmative</td><td>am / is / are + verbe-<b>ing</b></td><td>She is watching TV.</td></tr><tr><td>Négation</td><td>am / is / are + <b>not</b> + verbe-ing</td><td>They aren't playing.</td></tr><tr><td>Question</td><td>Am / Is / Are + sujet + verbe-ing</td><td>Are you waiting ?</td></tr></table><div class='key'><b>Orthographe :</b> write → writ<b>ing</b> ; run → ru<b>nn</b>ing ; study → study<b>ing</b>.<br><b>Attention :</b> les verbes d'état (<i>know, like, want, love</i>) ne se mettent pas à la forme -ing : <i>I know</i>, jamais « I am knowing ».</div><p>Marqueurs : <i>now, right now, at the moment, today, currently</i>.</p>",
+  v: [["now","maintenant"],["at the moment","en ce moment"],["today","aujourd'hui"],["currently","actuellement"],["watch","regarder"],["listen to","écouter"],["cook","cuisiner"],["wait for","attendre"],["rain","pleuvoir"],["sleep","dormir"]],
+  x: ["I am studying English.", "She is watching TV in the living room.", "They aren't playing football because it is raining."],
+  ex: [
+    { q: "I ___ ___ English. (study)", a: ["am studying"] }, { q: "She ___ ___ TV. (watch)", a: ["is watching"] }, { q: "They ___ ___ football. (play)", a: ["are playing"] },
+    { q: "Choisissez : « I ___ now. »", o: ["work", "am working"], c: 1 },
+    { q: "Choisissez : « She ___ every day. »", o: ["studies", "is studying"], c: 0, e: "« Every day » indique une habitude : present simple." },
+    { q: "Négation : « He is cooking. »", a: ["He is not cooking", "He isn't cooking", "He's not cooking"] },
+    { q: "Question : « You are waiting. »", a: ["Are you waiting"] },
+    { q: "She is ___ in the park. (run)", a: ["running"] },
+    { say: "They are playing football.", q: "Écoutez et écrivez la phrase.", a: ["They are playing football", "They're playing football"] }
+  ],
+  oral: "Décrivez à voix haute <b>ce que vous faites en ce moment</b> et ce que font les personnes autour de vous (au moins 6 phrases).<br><i>I am sitting on my sofa. My brother is…</i>",
+  ev: [
+    { q: "Look ! It ___ now.", o: ["rains", "is raining", "rain"], c: 1 },
+    { q: "They ___ football at the moment. (play)", a: ["are playing"] },
+    { q: "Négation : « She is sleeping. »", a: ["She is not sleeping", "She isn't sleeping", "She's not sleeping"] },
+    { q: "Question : « You are listening to music. »", a: ["Are you listening to music"] },
+    { q: "Quelle phrase est correcte ?", o: ["I am knowing the answer.", "I know the answer.", "I knowing the answer."], c: 1, e: "« Know » est un verbe d'état : pas de forme -ing." },
+    { q: "He is ___ in the park. (run)", a: ["running"] },
+    { q: "Traduisez : « Je cuisine en ce moment. »", a: ["I am cooking at the moment", "I'm cooking at the moment", "I am cooking now", "I'm cooking now", "I am cooking right now", "I'm cooking right now"] },
+    { q: "Corrigez : « She are working today. »", a: ["She is working today", "She's working today"] },
+    { q: "« Every day, I ___ to work. »", o: ["go", "am going"], c: 0 },
+    { q: "Traduisez : « Elles ne regardent pas la télévision. »", a: ["They are not watching TV", "They aren't watching TV", "They are not watching television", "They aren't watching television"] }
+  ]
+},
+5: {
+  l: "<p><b>A / an</b> s'emploient devant un nom singulier non précisé : <b>a</b> devant un <i>son</i> de consonne (<i>a computer</i>), <b>an</b> devant un <i>son</i> de voyelle (<i>an apple, an hour</i>). C'est le son qui compte : <i>a university</i> (son « you »).</p><p><b>The</b> désigne ce qui est connu ou unique : <i>the sun, the book on the table</i>.</p><p><b>Ø (aucun article)</b> pour les généralités et les noms indénombrables : <i>I drink water. People like music.</i></p><table><tr><th>Pluriel</th><th>Règle</th><th>Exemples</th></tr><tr><td>Régulier</td><td>+ s</td><td>computer → computers</td></tr><tr><td>-s, -x, -ch, -sh</td><td>+ es</td><td>box → boxes</td></tr><tr><td>consonne + y</td><td>y → ies</td><td>city → cities</td></tr><tr><td>Irréguliers</td><td>à apprendre</td><td>man → men, woman → women, child → children, person → people, foot → feet</td></tr></table>",
+  v: [["apple","pomme"],["hour","heure"],["university","université"],["sun","soleil"],["water","eau"],["child","enfant"],["people","gens"],["man","homme"],["woman","femme"],["city","ville"]],
+  x: ["I have a computer and an apple.", "The sun is hot, and the children are drinking water.", "We waited for an hour at a university in London."],
+  ex: [
+    { q: "___ apple", o: ["a", "an", "the", "Ø (aucun article)"], c: 1 },
+    { q: "___ computer", o: ["a", "an", "the", "Ø (aucun article)"], c: 0 },
+    { q: "___ sun", o: ["a", "an", "the", "Ø (aucun article)"], c: 2 },
+    { q: "___ water (en général)", o: ["a", "an", "the", "Ø (aucun article)"], c: 3 },
+    { q: "___ university", o: ["a", "an", "the", "Ø (aucun article)"], c: 0, e: "University commence par le son « you » (consonne)." },
+    { q: "Pluriel : computer", a: ["computers"] }, { q: "Pluriel : person", a: ["people"] }, { q: "Pluriel : child", a: ["children"] },
+    { q: "Pluriel : man", a: ["men"] }, { q: "Pluriel : woman", a: ["women"] },
+    { say: "The children are here.", q: "Écoutez et écrivez la phrase.", a: ["The children are here"] }
+  ],
+  oral: "Décrivez à voix haute <b>la pièce où vous vous trouvez</b> en utilisant a / an / the et des pluriels (au moins 6 phrases).<br><i>There is a table and two chairs. The window is open…</i>",
+  ev: [
+    { q: "I have ___ umbrella.", o: ["a", "an", "the"], c: 1 },
+    { q: "___ moon goes around the Earth.", o: ["A", "An", "The"], c: 2 },
+    { q: "She drinks ___ coffee every morning.", o: ["a", "the", "Ø (aucun article)"], c: 2 },
+    { q: "Pluriel : city", a: ["cities"] },
+    { q: "Pluriel : box", a: ["boxes"] },
+    { q: "Pluriel : foot", a: ["feet"] },
+    { q: "Corrigez : « She is a engineer. »", a: ["She is an engineer"] },
+    { q: "Quelle phrase est correcte ?", o: ["Peoples are nice.", "People are nice.", "Persons are nice."], c: 1, e: "« People » est déjà le pluriel de « person »." },
+    { q: "He has two ___. (child)", a: ["children"] },
+    { q: "Traduisez : « Les enfants aiment la musique. »", a: ["Children like music", "Children love music", "The children like music", "The children love music"] }
+  ]
+},
+e1: {
+  ev: [
+    { q: "She ___ a teacher.", o: ["is", "are", "am"], c: 0, p: .5 },
+    { q: "They ___ at school. (to be)", a: ["are"], p: .5 },
+    { q: "My brother ___ two cars.", o: ["have", "has", "haves"], c: 1, p: .5 },
+    { q: "___ you have a phone ?", o: ["Do", "Does", "Are"], c: 0, p: .5 },
+    { q: "Négation : « She has a dog. »", a: ["She does not have a dog", "She doesn't have a dog"], p: .5 },
+    { q: "He ___ in Paris. (work)", a: ["works"], p: .5 },
+    { q: "She ___ every day. (study)", a: ["studies"], p: .5 },
+    { q: "Question : « They play football. »", a: ["Do they play football"], p: .5 },
+    { q: "Négation : « He lives here. »", a: ["He does not live here", "He doesn't live here"], p: .5 },
+    { q: "Look ! They ___. (play)", a: ["are playing"], p: .5 },
+    { q: "I am ___ TV now. (watch)", a: ["watching"], p: .5 },
+    { q: "Négation : « I am working. »", a: ["I am not working", "I'm not working"], p: .5 },
+    { q: "Question : « She is cooking. »", a: ["Is she cooking"], p: .5 },
+    { q: "I have ___ idea.", o: ["a", "an", "the"], c: 1, p: .5 },
+    { q: "___ sun is hot.", o: ["A", "An", "The"], c: 2, p: .5 },
+    { q: "Pluriel : woman", a: ["women"], p: .5 },
+    { q: "Pluriel : bus", a: ["buses"], p: .5 },
+    { q: "Quelle phrase est correcte ?", o: ["She don't like tea.", "She doesn't likes tea.", "She doesn't like tea."], c: 2, p: .5 },
+    { q: "Corrigez : « He have a car. »", a: ["He has a car"], p: .5 },
+    { q: "« Every Sunday, we ___ football. »", o: ["play", "are playing"], c: 0, p: .5 },
+    { q: "Traduisez : « Nous sommes prêts. »", a: ["We are ready", "We're ready"], p: 2 },
+    { q: "Traduisez : « Elle a deux frères. »", a: ["She has two brothers"], p: 2 },
+    { q: "Traduisez : « Il ne travaille pas le dimanche. »", a: ["He does not work on Sundays", "He doesn't work on Sundays", "He does not work on Sunday", "He doesn't work on Sunday"], p: 2 },
+    { q: "Traduisez : « Ils regardent la télévision en ce moment. »", a: ["They are watching TV at the moment", "They are watching TV now", "They are watching television at the moment", "They are watching television now", "They're watching TV at the moment", "They're watching TV now"], p: 2 },
+    { q: "Traduisez : « J'ai un ordinateur et une pomme. »", a: ["I have a computer and an apple"], p: 2 }
+  ]
+}
 };
