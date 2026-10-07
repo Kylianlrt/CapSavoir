@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajouter du contenu · Cap Savoir</title><link rel="stylesheet" href="style.css">
+<style>main{max-width:860px;margin:0 auto;padding:24px 18px 60px}label{display:block;font-weight:700;margin:16px 0 4px}small{font-weight:400;color:var(--mut)}textarea{min-height:90px;font-family:ui-monospace,Menlo,monospace;font-size:.9rem}select{width:100%;padding:10px;font:inherit}pre{background:#0e1420;color:#e7eef4;padding:14px;border-radius:10px;overflow:auto;white-space:pre-wrap;font-size:.85rem}.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.g{grid-template-columns:1fr}}[hidden]{display:none!important}.where{background:var(--soft);border-left:4px solid var(--pri);padding:10px 14px;border-radius:8px;margin-top:16px}</style></head>
+<body><main>
+<h1>Ajouter du contenu en 30 secondes</h1>
+<label>Où ajouter ?</label>
+<select id="k">
+<optgroup label="Thèmes « module »"><option value="m:espagnol">Espagnol</option><option value="m:francais">Français</option><option value="m:orthographe">Orthographe</option><option value="m:coderoute">Code de la route</option><option value="m:culture">Culture générale</option><option value="m:histoire">Histoire-Géographie</option><option value="m:maths">Mathématiques</option><option value="m:eloquence">Éloquence</option><option value="m:politique">Politique</option><option value="m:sciences">Sciences</option></optgroup>
+<optgroup label="Parcours"><option value="p:anglais">Anglais</option><option value="p:chinois">Chinois</option><option value="c:cyber">Cybersécurité</option></optgroup>
+<optgroup label="Nouveau"><option value="n:new">Créer un nouveau thème</option></optgroup></select>
+
+<div id="fN" hidden><div class="g"><div><label>Identifiant <small>(sans espace : allemand)</small></label><input id="nid"></div><div><label>Nom affiché</label><input id="nnom" placeholder="Allemand"></div></div>
+<label>Description</label><input id="ndesc" placeholder="Parlez l'allemand pas à pas"></div>
+
+<div id="fC">
+<div class="g"><div id="fM"><label>Module <small>(facultatif)</small></label><input id="m" placeholder="Module 2 — Le quotidien"></div>
+<div id="fNum" hidden><label>N° du cours <small>(ex : 12 · examen de module : e1, e2…)</small></label><input id="num" placeholder="12"></div></div>
+<label>Titre du cours</label><input id="ti" placeholder="Les verbes en -ar">
+<label>Leçon <small>(« ## » titre · « ! » encadré À retenir · **gras**)</small></label><textarea id="l" rows="6"></textarea>
+<label>Vocabulaire <small>(mot = traduction / définition, une ligne chacun)</small></label><textarea id="v"></textarea>
+<div id="fX"><label>Exemples <small>(3 lignes : simple, moyenne, avancée)</small></label><textarea id="x"></textarea>
+<label>Consigne orale</label><input id="o"></div>
+<div id="fT" hidden><label>Lab pratique <small>(« $ commande » = bloc code)</small></label><textarea id="lab"></textarea>
+<label>Analyse</label><textarea id="an"></textarea></div>
+<label>Exercices <small>(QCM : Question | Bonne* | Autre | Autre — Libre : Question = réponse / variante)</small></label><textarea id="e" rows="5"></textarea>
+<label>Évaluation <small>(facultatif : sinon reprend les exercices)</small></label><textarea id="ev"></textarea></div>
+
+<p><button class="p" id="cp">Copier le bloc</button> <button id="ex">Remplir un exemple</button></p>
+<div class="where" id="wh"></div><pre id="out"></pre>
+</main>
+<script>
+const $=s=>$d.querySelector(s),$d=document,L=id=>$(id).value.split("\n").map(s=>s.trim()).filter(Boolean);
+const B=s=>s.replace(/\*\*(.+?)\*\*/g,"<b>$1</b>");
+const html=a=>a.map(s=>s.startsWith("## ")?`<h2>${B(s.slice(3))}</h2>`:s.startsWith("! ")?`<div class='key'>${B(s.slice(2))}</div>`:s.startsWith("$ ")?`<pre><code>${s.slice(2).replace(/</g,"&lt;")}</code></pre>`:`<p>${B(s)}</p>`).join("");
+const quest=a=>a.map(s=>{s=s.replace(/^\?\s*/,"");if(s.includes(" | ")){const p=s.split(" | ").map(x=>x.trim()),o=p.slice(1);return{q:p[0],o:o.map(x=>x.replace(/\*$/,"")),c:Math.max(0,o.findIndex(x=>x.endsWith("*")))}}
+ const i=s.lastIndexOf(" = ");return i<0?null:{q:s.slice(0,i).trim(),a:s.slice(i+3).split(" / ").map(x=>x.trim())}}).filter(Boolean);
+const pairs=a=>a.map(s=>{const i=s.indexOf(" = ");return i<0?[s,""]:[s.slice(0,i),s.slice(i+3)]});
+const J=JSON.stringify,qs=s=>s.replace(/\\/g,"\\\\").replace(/`/g,"\\`").replace(/\$\{/g,"\\${");
+function gen(){const[ty,id]=$("#k").value.split(":");
+ $("#fN").hidden=ty!="n";$("#fC").hidden=ty=="n";$("#fM").hidden=ty!="m";$("#fNum").hidden=ty=="m";$("#fX").hidden=ty=="c";$("#fT").hidden=ty!="c";
+ let r="",w="";
+ if(ty=="n"){const i=($("#nid").value.trim()||"nouveau").toLowerCase().replace(/\W/g,"");
+  r=`  { id: ${J(i)}, nom: ${J($("#nnom").value||i)}, desc: ${J($("#ndesc").value)},\n    page: "module.html?t=${i}", pct: "pm-${i}", meta: "Parcours progressif · évaluations",\n    lecons: [], evaluations: [] },`;
+  w="Collez ce bloc dans la liste THEMES de <b>data.js</b> (entre deux thèmes, virgule comprise). S'il existe déjà, remplacez l'ancien. Ensuite ajoutez ses cours avec « Thèmes module ».";}
+ else if(ty=="m"){const l=L("#l"),v=L("#v"),x=L("#x"),e=L("#e"),ev=L("#ev"),o=$("#o").value.trim(),m=$("#m").value.trim(),sec=(t,a)=>a.length?`@${t}\n${a.join("\n")}\n`:"";
+  r=`cours("${id}", \`\n${m?"=== "+m+"\n":""}--- ${$("#ti").value.trim()||"Titre du cours"}\n${l.join("\n")}\n${sec("vocab",v)}${sec("exemples",x)}${sec("exercices",e)}${o?"@oral\n"+o+"\n":""}${sec("eval",ev)}\`);`;r=qs(r).replace(/^cours\("(\w+)", \\`/,'cours("$1", `').replace(/\\`\);$/,'`);');
+  w="Collez sous <code>/* AJOUTEZ VOS COURS ICI */</code> dans <b>module-contenu.js</b>, avant <code>const PARCOURS</code>.";}
+ else{const n=$("#num").value.trim()||"1",k=/^e\d+$/.test(n)?n:n,ev=quest(L("#ev")),ex=quest(L("#e")),f=ty=="c"?"cyber-data.js":id+"-data.js";
+  const parts=[`l: ${J(html(L("#l")))}`,`v: ${J(pairs(L("#v")))}`];
+  if(ty=="c")parts.push(`lab: ${J(html(L("#lab")))}`);else{const x=L("#x");while(x.length&&x.length<3)x.push(x[x.length-1]);parts.push(`x: ${J(x)}`,`oral: ${J($("#o").value.trim())}`)}
+  if(ty=="c")parts.push(`an: ${J(html(L("#an")))}`);
+  parts.push(`ex: ${J(ex)}`);if(ev.length)parts.push(`ev: ${J(ev)}`);
+  r=`  ${/^e\d/.test(k)?J(k):k}: {\n    ${parts.join(",\n    ")}\n  },`;
+  w=`1) Dans <b>${f}</b>, vérifiez que « ${$("#ti").value.trim()||"le titre"} » figure dans <code>PLAN</code> (module concerné, à la bonne place). 2) Collez ce bloc dans <code>CONTENT</code>, avec une virgule avant si besoin. Le n° ${n} = ordre du cours dans tout le parcours (les « Examen du… » ne comptent pas, leur clé est e1, e2…).`;}
+ $("#out").textContent=r;$("#wh").innerHTML=w}
+$d.querySelectorAll("input,textarea,select").forEach(e=>e.oninput=gen);gen();
+$("#cp").onclick=()=>{navigator.clipboard.writeText($("#out").textContent);$("#cp").textContent="Copié ✓"};
+$("#ex").onclick=()=>{$("#ti").value="Les verbes en -er";$("#l").value="## Présent\nLes verbes en **-er** se terminent par -e, -es, -e, -ons, -ez, -ent.\n! Chanter : je chante.";$("#v").value="chanter = je chante\nparler = ils parlent";$("#x").value="Je parle.\nTu aimes le chocolat.\nNous mangeons à midi.";$("#lab").value="Ouvrez un terminal.\n$ ping 127.0.0.1";$("#an").value="Que renvoie la commande ?";$("#e").value="Nous ___ (chanter) = chantons\nIls parl___ | -ent* | -es | -ez";$("#o").value="Conjuguez parler à voix haute.";gen()};
+</script></body></html>
