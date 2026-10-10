@@ -1,3 +1,20 @@
+/* ---- Diagnostic : toute erreur de chargement s'affiche en rouge en haut de la page ---- */
+window.__errs = window.__errs || [];
+addEventListener("error", ev => { window.__errs.push((ev.filename || "").split("/").pop() + " : " + ev.message); });
+
+/* ---- Filet de sécurité : si module-data.js est absent, on fournit le minimum ---- */
+if (typeof MODS === "undefined") window.MODS = {};
+if (typeof Q === "undefined") window.Q = (q, o, c) => ({ q, o, c });
+if (typeof T === "undefined") window.T = (q, a) => ({ q, a: Array.isArray(a) ? a : [a] });
+if (typeof C === "undefined") window.C = (l, v, x, ex, oral, ev) => ({ l, v, x, ex, oral, ev });
+if (typeof mod === "undefined") window.mod = (id, nom, lang) => {
+  const t = (typeof THEMES !== "undefined" && THEMES.find(x => x.id === id)) || {};
+  MODS[id] = { id, store: "p-" + id, pct: t.pct || "pm-" + id, tech: false, unite: "Cours", lang: lang || "fr-FR",
+    eyebrow: "Parcours progressif", titre: "Formation : " + (nom || id),
+    lead: "Validez chaque évaluation avec <b>15/20</b> pour débloquer la suite.",
+    steps: ["Leçon", "Vocabulaire", "Exemples", "Exercices", "Oral", "Évaluation"], plan: [], content: {} };
+};
+
 /* =====================================================================
    MOTEUR DES COURS (ne plus y mettre de contenu : voir contenu-langues.js et contenu-savoirs.js)
 
@@ -22,8 +39,8 @@
 function cours(id, txt) {
   let m = MODS[id];
   if (!m) { // thème déclaré dans data.js mais sans module : on le crée
-    const t = THEMES.find(x => x.id === id);
-    if (!t) return console.error("Thème inconnu : " + id + " (ajoutez-le dans data.js)");
+    const t = THEMES.find(x => x.id === id) || { nom: id.charAt(0).toUpperCase() + id.slice(1) };
+    if (!THEMES.some(x => x.id === id)) console.warn("Thème « " + id + " » absent de data.js : il n'apparaîtra pas sur l'accueil.");
     mod(id, t.nom, t.lang || "fr-FR", ["", ""], null); m = MODS[id]; m.plan = []; m.content = {};
   }
   const B = s => s.replace(/\*\*(.+?)\*\*/g, "<b>$1</b>");
@@ -64,3 +81,9 @@ function cours(id, txt) {
   });
   fin();
 }
+
+/* ---- Chargement automatique des fichiers de cours (module.html n'a pas besoin d'être modifié) ---- */
+(function () {
+  const fichiers = ["contenu-langues.js", "contenu-langues-2.js", "contenu-savoirs.js", "contenu-savoirs-2.js", "contenu-savoirs-3.js", "module-fin.js"];
+  fichiers.forEach(f => document.write('<script src="' + f + '" onerror="(window.__miss=window.__miss||[]).push(\'' + f + '\')"><\/script>'));
+})();
