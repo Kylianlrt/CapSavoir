@@ -1,30 +1,34 @@
 # Ajouter ou modifier un cours — mode d'emploi
 
-## Thèmes « module » (espagnol, français, orthographe, maths, code de la route, culture, histoire)
-Tout se passe dans **module-data.js**, à la fin du fichier, avant `const PARCOURS`.
+## Fichiers
+- `contenu-langues.js` : italien, espagnol, français, orthographe
+- `contenu-savoirs.js` : code de la route, culture, histoire, maths, éloquence, politique, sciences, économie, philosophie
+- `module-contenu.js` : le moteur (ne pas y mettre de cours)
+- `module-fin.js` : doit rester chargé en dernier dans `module.html`
+- `anglais-data.js`, `chinois-data.js`, `cyber-data.js` : parcours à part (PLAN + CONTENT)
 
-**Ajouter le contenu d'un cours** (les cours sont numérotés dans l'ordre, tous modules confondus) :
-```js
-add("espagnol", 6, C(
-  "<h2>Titre</h2><p>Leçon en HTML…</p><div class='key'>À retenir</div>",   // leçon
-  [["mot","traduction"], …5 paires],                                       // vocabulaire
-  ["Exemple simple.","Exemple intermédiaire.","Exemple avancé."],          // 3 exemples
-  [Q("Question ?",["A","B","C"],1), T("Question libre ?","réponse")],       // exercices
-  "Consigne orale.",                                                        // oral
-  [ …5 questions… ]                                                         // évaluation (5 × 4 pts = 20)
-));
+## Ajouter un cours (30 secondes)
+Utilisez `ajouter.html`, ou copiez ce bloc dans un fichier de contenu :
 ```
-- `Q(question, [choix], indexBonneRéponse)` = QCM · `T(question, "réponse" ou ["variante1","variante2"])` = réponse libre.
-- Un cours sans `add(...)` s'affiche « Bientôt disponible ».
-
-**Ajouter un module** : `addModule("espagnol", "Module 3 — Titre", "Cours A|Cours B|Cours C");`
-**Nouveau thème** : `mod("id", "Nom", "langue-voix", ["Module 1 — Titre", "Cours 1|Cours 2"], C(...))`, puis une entrée dans **data.js** avec `page: "module.html?t=id"` et `pct: "pm-id"`.
-
-## Anglais, chinois, cybersécurité
-Chaque thème a son fichier (`anglais-data.js`, `chinois-data.js`, `cyber-data.js`) : modifiez `PLAN` (modules et titres) puis `CONTENT` (clé = numéro du cours, ou `e1`, `e2`… pour les examens de module).
-Pour la cybersécurité, le format est `{ l, v, lab, ex, an, ev }`.
-
-## Bonnes pratiques
-- Une évaluation = 5 à 10 questions ; le barème est automatiquement ramené à 20 points.
-- Évitez les guillemets doubles dans le HTML des leçons (utilisez `'`).
-- Après modification, rechargez la page (Ctrl+F5) : la progression reste conservée.
+cours("espagnol", `
+=== Nom du module
+--- Titre du cours
+## Titre de la leçon
+Texte (**gras** ; « ! » = encadré À retenir)
+@vocab
+mot = traduction
+@exemples
+Simple. / Moyenne. / Avancée. (une par ligne)
+@exercices
+? QCM | Bonne* | Autre | Autre
+? Question libre = réponse / variante
+@oral
+Consigne orale.
+@eval
+? (5 questions conseillées)
+`);
+```
+- Un nouveau nom après `===` crée un nouveau module. Un nouveau thème : ajoutez-le dans `data.js` (avec `page`, `pct`, `lang`), puis écrivez `cours("id", ...)`.
+- Les réponses libres acceptent la saisie avec ou sans accents.
+- Évitez les accolades-dollar et les accents graves dans le texte.
+- Rechargez avec Ctrl+F5 : la progression est conservée.

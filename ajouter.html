@@ -6,7 +6,7 @@
 <h1>Ajouter du contenu en 30 secondes</h1>
 <label>Où ajouter ?</label>
 <select id="k">
-<optgroup label="Thèmes « module »"><option value="m:espagnol">Espagnol</option><option value="m:francais">Français</option><option value="m:orthographe">Orthographe</option><option value="m:coderoute">Code de la route</option><option value="m:culture">Culture générale</option><option value="m:histoire">Histoire-Géographie</option><option value="m:maths">Mathématiques</option><option value="m:eloquence">Éloquence</option><option value="m:politique">Politique</option><option value="m:sciences">Sciences</option></optgroup>
+<optgroup label="Thèmes « module »"><option value="m:espagnol">Espagnol</option><option value="m:italien">Italien</option><option value="m:francais">Français</option><option value="m:orthographe">Orthographe</option><option value="m:coderoute">Code de la route</option><option value="m:culture">Culture générale</option><option value="m:histoire">Histoire-Géographie</option><option value="m:maths">Mathématiques</option><option value="m:eloquence">Éloquence</option><option value="m:politique">Politique</option><option value="m:sciences">Sciences</option><option value="m:economie">Économie</option><option value="m:philosophie">Philosophie</option></optgroup>
 <optgroup label="Parcours"><option value="p:anglais">Anglais</option><option value="p:chinois">Chinois</option><option value="c:cyber">Cybersécurité</option></optgroup>
 <optgroup label="Nouveau"><option value="n:new">Créer un nouveau thème</option></optgroup></select>
 
@@ -45,7 +45,7 @@ function gen(){const[ty,id]=$("#k").value.split(":");
   w="Collez ce bloc dans la liste THEMES de <b>data.js</b> (entre deux thèmes, virgule comprise). S'il existe déjà, remplacez l'ancien. Ensuite ajoutez ses cours avec « Thèmes module ».";}
  else if(ty=="m"){const l=L("#l"),v=L("#v"),x=L("#x"),e=L("#e"),ev=L("#ev"),o=$("#o").value.trim(),m=$("#m").value.trim(),sec=(t,a)=>a.length?`@${t}\n${a.join("\n")}\n`:"";
   r=`cours("${id}", \`\n${m?"=== "+m+"\n":""}--- ${$("#ti").value.trim()||"Titre du cours"}\n${l.join("\n")}\n${sec("vocab",v)}${sec("exemples",x)}${sec("exercices",e)}${o?"@oral\n"+o+"\n":""}${sec("eval",ev)}\`);`;r=qs(r).replace(/^cours\("(\w+)", \\`/,'cours("$1", `').replace(/\\`\);$/,'`);');
-  w="Collez sous <code>/* AJOUTEZ VOS COURS ICI */</code> dans <b>module-contenu.js</b>, avant <code>const PARCOURS</code>.";}
+  w="Collez à la fin de <b>contenu-langues.js</b> (langues, orthographe) ou <b>contenu-savoirs.js</b> (autres thèmes). Pas de nouveau module ? Mettez « === Nom du module » : il sera créé tout seul.";}
  else{const n=$("#num").value.trim()||"1",k=/^e\d+$/.test(n)?n:n,ev=quest(L("#ev")),ex=quest(L("#e")),f=ty=="c"?"cyber-data.js":id+"-data.js";
   const parts=[`l: ${J(html(L("#l")))}`,`v: ${J(pairs(L("#v")))}`];
   if(ty=="c")parts.push(`lab: ${J(html(L("#lab")))}`);else{const x=L("#x");while(x.length&&x.length<3)x.push(x[x.length-1]);parts.push(`x: ${J(x)}`,`oral: ${J($("#o").value.trim())}`)}

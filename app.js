@@ -30,6 +30,9 @@ const ICON = {
   anglais: ["#c2410c", '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>'],
   eloquence: ["#7c3aed", '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v3"/>'],
   politique: ["#0f766e", '<path d="M3 10l9-6 9 6M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20h18"/>'],
+  italien: ["#16a34a", '<path d="M4 20V9l8-5 8 5v11M9 20v-6h6v6"/>'],
+  economie: ["#b45309", '<path d="M4 19h16M6 16V9M11 16V5M16 16v-5M21 16V8"/>'],
+  philosophie: ["#6d28d9", '<circle cx="12" cy="9" r="5"/><path d="M9 21h6M12 14v7"/>'],
   sciences: ["#15803d", '<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3"/><path d="M7.5 15h9"/>']
 };
 const iconOf = id => { const [c, p] = ICON[id] || ["#1d4e89", '<path d="M4 5h16v14H4z"/>'];
@@ -78,17 +81,8 @@ function chrome() {
 /* Secours : si data.js ne définit pas catsAll(), on regroupe les thèmes par catégorie */
 if (typeof catsAll === "undefined") {
   window.catsAll = () => {
-    const G = [["Langues", ["anglais", "chinois", "espagnol", "francais", "orthographe"]], ["Informatique", ["cybersecurite"]],
-      ["Culture et société", ["culture", "histoire", "politique", "eloquence"]], ["Sciences et mathématiques", ["maths", "sciences"]], ["Permis", ["coderoute"]]];
-    const used = new Set(G.flatMap(g => g[1])), rest = THEMES.map(t => t.id).filter(i => !used.has(i));
-    if (rest.length) G.push(["Autres", rest]);
-    return G.map(([nom, themes]) => ({ nom, themes: themes.filter(i => THEMES.some(t => t.id === i)) })).filter(c => c.themes.length);
-  };
-}
-if (typeof catsAll === "undefined") {
-  window.catsAll = () => {
-    const G = [["Langues", ["anglais", "chinois", "espagnol", "francais", "orthographe"]], ["Informatique", ["cybersecurite"]],
-      ["Culture et société", ["culture", "histoire", "politique", "eloquence"]], ["Sciences et mathématiques", ["maths", "sciences"]], ["Permis", ["coderoute"]]];
+    const G = [["Langues", ["anglais", "chinois", "espagnol", "italien", "francais", "orthographe"]], ["Informatique", ["cybersecurite"]],
+      ["Culture et société", ["culture", "histoire", "politique", "eloquence", "philosophie", "economie"]], ["Sciences et mathématiques", ["maths", "sciences"]], ["Permis", ["coderoute"]]];
     const used = new Set(G.flatMap(g => g[1])), rest = THEMES.map(t => t.id).filter(i => !used.has(i));
     if (rest.length) G.push(["Autres", rest]);
     return G.map(([nom, themes]) => ({ nom, themes: themes.filter(i => THEMES.some(t => t.id === i)) })).filter(c => c.themes.length);
